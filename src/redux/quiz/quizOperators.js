@@ -1,14 +1,14 @@
 import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-axios.defaults.baseURL = 'http://localhost:3030//api/quiz';
+axios.defaults.baseURL = 'http://localhost:3030/api/quiz';
 
-export const getheader = createAsyncThunk(
-  'user/getheader',
-     async (credentials, thunkAPI) => {
+export const getCategories = createAsyncThunk(
+  '/getCategories',
+     async (_, thunkAPI) => {
        try {
-      const response = await axios.post(
-        `/getHeader`, credentials
+      const response = await axios.get(
+        `/getCategories`
          );
       return response.data;
        } catch (error) {
@@ -18,5 +18,41 @@ export const getheader = createAsyncThunk(
     }
   }
 );
+
+export const getCatCount = createAsyncThunk(
+  '/getCatCount',
+     async (credentials, thunkAPI) => {
+       try {
+         console.log('credentials', credentials)
+      const response = await axios.post(
+        `/getCatCount`, credentials
+         );
+      return response.data;
+       } catch (error) {
+              
+
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+export const getQuestions = createAsyncThunk(
+  '/getQuestions',
+     async (credentials, thunkAPI) => {
+       try {
+         console.log('credentials', credentials)
+      const response = await axios.post(
+        `/getQuestions`, credentials
+         );
+      return response.data;
+       } catch (error) {
+              
+
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+
 
 
