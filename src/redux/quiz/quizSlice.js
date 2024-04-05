@@ -9,7 +9,7 @@ const initialState = {
 };
 
 const quizSlice = createSlice({
-  name: 'task',
+  name: 'quiz',
     initialState,
         reducers: {
                
@@ -18,10 +18,11 @@ const quizSlice = createSlice({
                 builder
                          .addCase(getCategories.pending, (state, action) => { state.isloading = true; })
                          
-                  .addCase(getCategories.fulfilled, (state, action) => {
+                         .addCase(getCategories.fulfilled, (state, action) => {
+                           console.log(action.payload)
                           if (action.payload.code === 200) {
+                                
                                   state.quizCategories = action.payload.data
-                                  console.log(state.quizCategories)
                           }
                           state.isloading = false
       })
@@ -63,4 +64,4 @@ const quizSlice = createSlice({
 });
         //  export const {  } = quizSlice.actions;
   
-export const taskReducer = quizSlice.reducer;
+export const quizReducer = quizSlice.reducer;

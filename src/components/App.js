@@ -2,6 +2,7 @@ import './App.css';
 // import { getCategories, getCatCount, getQuestions } from '../redux/quiz/quizOperators';
 // import { useDispatch,  } from 'react-redux';
 // import {  useEffect } from 'react';
+import  Home  from '../pages/Home/Home'
 function App() {
   // const dispatch = useDispatch()
 //  useEffect(() => {
@@ -23,7 +24,7 @@ function App() {
 //     }, [dispatch,  ])
   return (
     <div className="App">
-     <h1>hi</h1>
+    < Home />
     </div>
   );
 }

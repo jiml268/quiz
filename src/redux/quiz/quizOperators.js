@@ -10,6 +10,7 @@ export const getCategories = createAsyncThunk(
       const response = await axios.get(
         `/getCategories`
          );
+         console.log('response.data', response.data)
       return response.data;
        } catch (error) {
               
@@ -23,7 +24,7 @@ export const getCatCount = createAsyncThunk(
   '/getCatCount',
      async (credentials, thunkAPI) => {
        try {
-         console.log('credentials', credentials)
+       
       const response = await axios.post(
         `/getCatCount`, credentials
          );
@@ -40,7 +41,7 @@ export const getQuestions = createAsyncThunk(
   '/getQuestions',
      async (credentials, thunkAPI) => {
        try {
-         console.log('credentials', credentials)
+        
       const response = await axios.post(
         `/getQuestions`, credentials
          );
