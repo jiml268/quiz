@@ -2,7 +2,8 @@ import { getCategories, } from '../../redux/quiz/quizOperators';
 import { useDispatch,  } from 'react-redux';
 import { useEffect } from 'react';
 import PickCategory from '../../components/Home/PickCategory/PickCategory'
-
+import PickDifficuly from '../../components/Home/PickDifficuly/PickDifficuly';
+import PickNumQuestions from '../../components/Home/PickNumQuestions/PickNumQuestions';
 function Home() {
 
  const dispatch = useDispatch()
@@ -19,7 +20,9 @@ function Home() {
 
  return (
      <>
-        <PickCategory />
+       <PickCategory />
+       <PickDifficuly />
+       < PickNumQuestions />
 
      </>
  )

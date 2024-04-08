@@ -1,25 +1,22 @@
-import { useDispatch, useSelector, } from 'react-redux'
+import { useDispatch,  } from 'react-redux'
 import { useState } from 'react';
-import { getquizCategories } from '../../../redux/quiz/quizSelectors'
-import { setCategory } from '../../../redux/quiz/quizSlice';
+import { setDifficult } from '../../../redux/quiz/quizSlice';
 import Box from '@mui/material/Box';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
-function PickCategory() {
+function PickDifficuly() {
 
- const dispatch = useDispatch()
-    const showCats = useSelector(getquizCategories)
-   
-
-    const [catPicked, setCatPicked] = useState('');
+    const dispatch = useDispatch()
+    
+const skills = ['Any', 'Easy', 'Medium', 'Hard']
+    const [skillPicked, setSkillPicked] = useState('');
 
   const handleChange = (e) => {
-      setCatPicked(e.target.value);
-    
-    dispatch(setCategory(e.target.value))
-    
+      setSkillPicked(e.target.value);
+      
+      dispatch(setDifficult(e.target.value))
   };
 
  return (
@@ -28,7 +25,7 @@ function PickCategory() {
 
          <Box sx={{ minWidth: 120 }}>
       <FormControl size = "small" >
-        <InputLabel id="demo-simple-select-label">Calegories</InputLabel>
+        <InputLabel id="demo-simple-select-label">Difficulty</InputLabel>
          <Select
 
            sx={{
@@ -38,14 +35,14 @@ function PickCategory() {
 
           labelId="demo-simple-select-label"
           id="demo-simple-select"
-          value={catPicked}
-          label="Catogories"
+          value={skillPicked}
+          label="Difficulty"
           onChange={handleChange}
                  >
                      
- {showCats.length > 0 && showCats.map((cat, index) => {
+ {skills.length > 0 && skills.map((skill, index) => {
         return (
-          <MenuItem key= {index} value={cat.id}>{cat.name}</MenuItem>
+          <MenuItem key= {index} value={skill}>{skill}</MenuItem>
         );
       })}
         </Select>
@@ -56,4 +53,4 @@ function PickCategory() {
  )
 }
 
-export default PickCategory
+export default PickDifficuly
