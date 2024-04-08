@@ -8,7 +8,8 @@ const initialState = {
   isloading: false,
   categoryPicked: 9,
   difficultPicked: "Any",
-  availableQuestion: 0,
+        availableQuestion: 0,
+  askQuestions: 1,
 };
 
 const quizSlice = createSlice({
@@ -20,7 +21,10 @@ const quizSlice = createSlice({
     },
     setDifficult: (state, action) => {
       state.difficultPicked = action.payload;
-    },
+          },
+     setAskQuestions: (state, action) => {
+      state.askQuestions = action.payload;
+          },
   },
   extraReducers: (builder) =>
     builder
@@ -45,9 +49,7 @@ const quizSlice = createSlice({
       .addCase(getCatCount.fulfilled, (state, action) => {
         if (action.payload.code === 200) {
           state.CategoryCount = action.payload.data;
-          console.log("state.difficultPicked", state.difficultPicked);
 
-          console.log("action.payload.data", action.payload.data);
 
           switch (state.difficultPicked) {
             case "Any":
@@ -69,7 +71,6 @@ const quizSlice = createSlice({
             default:
               state.availableQuestion = 0;
           }
-          console.log("state.availableQuestion", state.availableQuestion);
         }
         state.isloading = false;
       })
@@ -80,7 +81,7 @@ const quizSlice = createSlice({
         state.isloading = true;
       })
 
-      .addCase(getQuestions.fulfilled, (state, action) => {
+                  .addCase(getQuestions.fulfilled, (state, action) => {
         if (action.payload.code === 200) {
           state.quizQuestions = action.payload.data;
         }
@@ -90,6 +91,6 @@ const quizSlice = createSlice({
         state.isloading = false;
       }),
 });
-export const { setCategory, setDifficult } = quizSlice.actions;
+export const { setCategory, setDifficult, setAskQuestions } = quizSlice.actions;
 
 export const quizReducer = quizSlice.reducer;

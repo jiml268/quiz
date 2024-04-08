@@ -7,6 +7,9 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
+
+
+
 function PickCategory() {
 
  const dispatch = useDispatch()
@@ -26,8 +29,8 @@ function PickCategory() {
      <>
        
 
-         <Box sx={{ minWidth: 120 }}>
-      <FormControl size = "small" >
+         <Box sx={{ minWidth: "300px" }}>
+      <FormControl size = "small" style={{minWidth: 300}} >
         <InputLabel id="demo-simple-select-label">Calegories</InputLabel>
          <Select
 
@@ -45,7 +48,7 @@ function PickCategory() {
                      
  {showCats.length > 0 && showCats.map((cat, index) => {
         return (
-          <MenuItem key= {index} value={cat.id}>{cat.name}</MenuItem>
+          <MenuItem key= {index} value={cat.id} >{cat.name}</MenuItem>
         );
       })}
         </Select>

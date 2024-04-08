@@ -24,7 +24,7 @@ const skills = ['Any', 'Easy', 'Medium', 'Hard']
        
 
          <Box sx={{ minWidth: 120 }}>
-      <FormControl size = "small" >
+      <FormControl size = "small"   style={{minWidth: 300}} >
         <InputLabel id="demo-simple-select-label">Difficulty</InputLabel>
          <Select
 
