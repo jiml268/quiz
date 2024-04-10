@@ -5,6 +5,7 @@ import PickCategory from '../../components/Home/PickCategory/PickCategory'
 import PickDifficuly from '../../components/Home/PickDifficuly/PickDifficuly';
 import PickNumQuestions from '../../components/Home/PickNumQuestions/PickNumQuestions';
 import StartQuiz from '../../components/Home/StartQuiz/StartQuiz';
+import Description from '../../components/Home/Description/Description';
 
 function Home() {
 
@@ -21,13 +22,14 @@ function Home() {
 
 
  return (
-     <>
+   <div >
+      <Description />
        <PickCategory />
        <PickDifficuly />
      < PickNumQuestions />
      <StartQuiz />
 
-     </>
+     </div>
  )
 }
 

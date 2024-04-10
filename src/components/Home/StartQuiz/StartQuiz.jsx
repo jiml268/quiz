@@ -1,10 +1,13 @@
 import { useDispatch, useSelector, } from 'react-redux'
 import { getCategoryPicked, getDifficultPicked, getAskQuestions } from '../../../redux/quiz/quizSelectors'
 import { getQuestions } from '../../../redux/quiz/quizOperators';
+import { useNavigate } from "react-router-dom";
 
+import styles from './StartQuiz.module.css'
 
 function StartQuiz() {
- const dispatch = useDispatch()
+    const dispatch = useDispatch()
+    const navigate = useNavigate();
     const showCatsPicked = useSelector(getCategoryPicked)
     const showDiffivultPicked = useSelector(getDifficultPicked)
     const showQuestionCount = useSelector(getAskQuestions)
@@ -20,13 +23,13 @@ function StartQuiz() {
         const questionParms = { amount: showQuestionCount, cat_id: showCatsPicked, diff: setDiff}
 
        dispatch(getQuestions(questionParms))
-   
+    navigate("/quiz")
   };
 
 
      return (
          <>
-          <button onClick={handleClick}>Start Quiz</button>
+          <button className={styles.button} onClick={handleClick}>Start Quiz</button>
          </>
        
  )

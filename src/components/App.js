@@ -1,31 +1,23 @@
 import './App.css';
-// import { getCategories, getCatCount, getQuestions } from '../redux/quiz/quizOperators';
-// import { useDispatch,  } from 'react-redux';
-// import {  useEffect } from 'react';
-import  Home  from '../pages/Home/Home'
+import { Route, Routes } from 'react-router-dom';
+import Home from '../pages/Home/Home'
+
+import Quiz from '../pages/Quiz/Quiz';
+import FinalScore from '../pages/FinalScore/FinalScore';
 function App() {
-  // const dispatch = useDispatch()
-//  useEffect(() => {
-        
-       
-//         const fetchCats = async () => {
-//           // await dispatch(getCategories());
-//           // const catpick = { cat_id: 9 }
-//           // const noofquestions = await dispatch(getCatCount(catpick));
-//           // console.log('noofquestions', noofquestions)
-// const getQuest = {amount: 5, cat_id: 9, diff: 'easy'}
-//        const showquest = await dispatch(getQuestions(getQuest));
-//           console.log('showquest', showquest)   
-            
-//      }     
-//        fetchCats()
-//     // make sure to catch any error
-//     .catch(console.error);
-//     }, [dispatch,  ])
+
   return (
+   
     <div className="App">
-    < Home />
-    </div>
+     
+       <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/quiz" element={<Quiz />} />
+        <Route path="/end" element={<FinalScore />} />
+        <Route path="*" element={<p>Path not resolved</p>} />
+       </Routes>
+      </div>
+      
   );
 }
 

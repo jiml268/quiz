@@ -30,8 +30,8 @@ function PickNumQuestions() {
     };
 
      const handleInputChange = (event) => {
-         setQuizQuestions(event.target.value === '' ? 1 : event.target.value);
-         dispatch(setAskQuestions(event.target.value === '' ? 1 : event.target.value))
+         setQuizQuestions(event.target.value === '' ? 1 :  Number(event.target.value));
+         dispatch(setAskQuestions(event.target.value === '' ? 1 :  Number(event.target.value)))
   };
 
   const handleBlur = () => {
@@ -66,25 +66,28 @@ function PickNumQuestions() {
 
     return (
        
-        <Box sx={{ width: 225, margin: "0 auto", display: 'flex', flexDirection: 'column' }}>
-             <Typography id="input-slider" gutterBottom>
+        <Box sx={{ width: 225, margin: "10px auto" , display: 'flex', flexDirection: 'column' }}>
+             <Typography id="input-slider" gutterBottom sx={{ color: '#fff' }}>
         No of Questions to be asked
       </Typography>
             {showCatCount > 0 &&
                 <div>
-                <Slider aria-label="Always visible"
+            <Slider aria-label="Always visible"
+              sx={{ color: "#fff" }}
                     min={1}
                         max={showCatCount}
                         onChange={handleChange}
                 step={1}
                 value={quizQuestion}
                     valueLabelDisplay="auto" />
-                 <Input
+            <Input
+              sx={{ color: "#fff" }}
             value={quizQuestion}
             size="small"
             onChange={handleInputChange}
             onBlur={handleBlur}
-            inputProps={{
+              inputProps={{
+              
               step: 1,
               min: 1,
               max: showCatCount,

@@ -29,14 +29,15 @@ function PickCategory() {
      <>
        
 
-         <Box sx={{ minWidth: "300px" }}>
+         <Box sx={{ minWidth: "300px", margin:  "10px 0" }}>
       <FormControl size = "small" style={{minWidth: 300}} >
-        <InputLabel id="demo-simple-select-label">Calegories</InputLabel>
+        <InputLabel id="demo-simple-select-label" sx={{ color: "#fff" }}>Calegories</InputLabel>
          <Select
 
            sx={{
              maxHeight: 250,
              overflow: 'auto', // to enable scrolling
+             color: '#fff'
            }}
 
           labelId="demo-simple-select-label"

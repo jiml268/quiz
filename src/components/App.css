@@ -1,5 +1,18 @@
 .App {
   text-align: center;
+  display: flex;
+  flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    
+        background: url(../images/2384075.webp) no-repeat center center fixed;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+        
+      
 }
 
 .App-logo {

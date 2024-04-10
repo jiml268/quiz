@@ -23,14 +23,15 @@ const skills = ['Any', 'Easy', 'Medium', 'Hard']
      <>
        
 
-         <Box sx={{ minWidth: 120 }}>
+         <Box sx={{ minWidth: 120, margin: "10px 0" }}>
       <FormControl size = "small"   style={{minWidth: 300}} >
-        <InputLabel id="demo-simple-select-label">Difficulty</InputLabel>
+        <InputLabel id="demo-simple-select-label" sx={{ color: "#fff" }}>Difficulty</InputLabel>
          <Select
 
            sx={{
              maxHeight: 250,
              overflow: 'auto', // to enable scrolling
+             color: '#fff'
            }}
 
           labelId="demo-simple-select-label"
