@@ -2,9 +2,9 @@ import React, { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector, } from 'react-redux'
 import { getAskQuestions } from "../../../redux/quiz/quizSelectors";
+import styles from './CountDown.module.css'
 
-
-function Counter() {
+function CountDown() {
   const Ref = useRef(null);
     const navigate = useNavigate();
     const questionCnt = useSelector(getAskQuestions)
@@ -82,12 +82,10 @@ navigate("/end")
   
    return (
         <div
-            style={{ textAlign: "center", margin: "auto" }}>
-            <h1 style={{ color: "green" }}>
-                GeeksforGeeks
-            </h1>
+            style={{ textAlign: "center" }}>
+           
             <h3>Remaining Time</h3>
-            <h2>{timer}</h2>
+            <p className={styles.counterBox}>{timer}</p>
             
         </div>
     );
@@ -96,4 +94,4 @@ navigate("/end")
 
 };
 
-export default Counter
+export default CountDown

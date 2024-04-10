@@ -1,13 +1,18 @@
-import Counter from "../../components/Quiz/Counter/Counter"
+import CountDown from "../../components/Quiz/CountDown/CountDown"
+import Counters from "../../components/Quiz/Counters/Counters"
+import styles from './Quix.module.css'
 
 function Quiz() {
 
    
 
     return (
-    <>  
- <Counter />   
-<h1>Quiz page</h1>
+        <>  
+            <div className={styles.counter}>
+            <CountDown />   
+                <Counters />
+                </div>
+
 </>         
  )
 }
