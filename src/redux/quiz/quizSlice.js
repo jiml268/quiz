@@ -10,8 +10,8 @@ const initialState = {
   difficultPicked: "Any",
         availableQuestion: 0,
   askQuestions: 1,
-  correctAnswers: 1,
-  incorrectAnswers: 2
+  correctAnswers: 0,
+  incorrectAnswers: 0
 };
 
 const quizSlice = createSlice({
@@ -58,30 +58,35 @@ const quizSlice = createSlice({
         if (action.payload.code === 200) {
           state.CategoryCount = action.payload.data;
 
-
+          let questCnt = 0
           switch (state.difficultPicked) {
+            
             case "Any":
-              state.availableQuestion =
+              questCnt =
                 action.payload.data.category_question_count.total_question_count;
               break;
             case "Easy":
-              state.availableQuestion =
+              questCnt =
                 action.payload.data.category_question_count.total_easy_question_count;
               break;
             case "Medium":
-              state.availableQuestion =
+              questCnt =
                 action.payload.data.category_question_count.total_medium_question_count;
               break;
             case "Hard":
-              state.availableQuestion =
+              questCnt =
                 action.payload.data.category_question_count.total_hard_question_count;
               break;
             default:
-              state.availableQuestion = 0;
+              questCnt = 0;
           }
+            questCnt < 50 ?
+            state.availableQuestion = questCnt : state.availableQuestion = 50
+
         }
         state.isloading = false;
-      })
+        })
+      
       .addCase(getCatCount.rejected, (state, action) => {
         state.isloading = false;
       })
