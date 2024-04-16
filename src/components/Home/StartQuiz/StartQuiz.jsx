@@ -29,7 +29,7 @@ function StartQuiz() {
         const setupQuestions = createquestions(returnQuestions)
 dispatch(setQuizQuestions(setupQuestions))
  console.log('setupQuestions', setupQuestions)
-    navigate("/quiz")
+    navigate("/questions")
     };
     
 
