@@ -2,6 +2,7 @@ import { useDispatch, useSelector, } from 'react-redux'
 import { getCategoryPicked, getDifficultPicked, getAskQuestions } from '../../../redux/quiz/quizSelectors'
 import { getQuestions } from '../../../redux/quiz/quizOperators';
 import { useNavigate } from "react-router-dom";
+import { setQuizQuestions } from '../../../redux/quiz/quizSlice';
 
 import styles from './StartQuiz.module.css'
 
@@ -19,12 +20,50 @@ function StartQuiz() {
     }
 
 
-    const handleClick = (event) => {
+    const handleClick = async (event) => {
         const questionParms = { amount: showQuestionCount, cat_id: showCatsPicked, diff: setDiff}
 
-       dispatch(getQuestions(questionParms))
+        const respone = await dispatch(getQuestions(questionParms))
+        const returnQuestions = respone.payload.data
+       
+        const setupQuestions = createquestions(returnQuestions)
+dispatch(setQuizQuestions(setupQuestions))
+ console.log('setupQuestions', setupQuestions)
     navigate("/quiz")
-  };
+    };
+    
+
+    const createquestions = (returnQuestions) => {
+        const allQuestion = []
+        returnQuestions.map((item) => {
+            const answers = []
+            if (item.type === "boolean") {
+                    answers.push('True', 'False')
+            } else {
+
+ const numberOfAnswers = item.incorrect_answers.length + 1
+                const correctChoice = Math.floor(Math.random() * numberOfAnswers)
+                for (let i = 0; i < numberOfAnswers; i++) {
+                    if (i < correctChoice) {
+                        answers.push( item.incorrect_answers[i] )
+                    };
+                    if (i === correctChoice) {
+                        answers.push(item.correct_answer )
+                    }
+                    if (i > correctChoice) {
+                        answers.push( item.incorrect_answers[i - 1])
+                    }
+                    
+                   
+                }
+            }
+            const shuffledAnsweres =  answers.length > 2 ? answers.sort((a, b) => 0.5 - Math.random()): answers
+            const currentQuestion = { correct_answer: item.correct_answer, question: item.question, answers: shuffledAnsweres }
+            allQuestion.push(currentQuestion)   
+            return allQuestion
+        })
+    return (allQuestion)
+    }
 
 
      return (

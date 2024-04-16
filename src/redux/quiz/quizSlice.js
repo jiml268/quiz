@@ -32,7 +32,11 @@ const quizSlice = createSlice({
     },
      setIncorrectAnswers: (state, action) => {
       state.incorrectAnswers = action.payload;
-          },
+    },
+     setQuizQuestions: (state, action) => {
+      state.quizQuestions = action.payload;
+    },
+     
   },
   extraReducers: (builder) =>
     builder
@@ -95,15 +99,15 @@ const quizSlice = createSlice({
       })
 
                   .addCase(getQuestions.fulfilled, (state, action) => {
-        if (action.payload.code === 200) {
-          state.quizQuestions = action.payload.data;
-        }
+        // if (action.payload.code === 200) {
+        //   state.quizQuestions = action.payload.data;
+        // }
         state.isloading = false;
       })
       .addCase(getQuestions.rejected, (state, action) => {
         state.isloading = false;
       }),
 });
-export const { setCategory, setDifficult, setAskQuestions, setCorrectAnswers, setIncorrectAnswers } = quizSlice.actions;
+export const { setCategory, setDifficult, setAskQuestions, setCorrectAnswers, setIncorrectAnswers, setQuizQuestions } = quizSlice.actions;
 
 export const quizReducer = quizSlice.reducer;

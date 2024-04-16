@@ -3,96 +3,72 @@ import { useSelector, useDispatch } from 'react-redux'
 import { useState } from "react"
 import {getCorrectAnswers, getIncorrectAnswers} from '../../../redux/quiz/quizSelectors'
 import { setCorrectAnswers, setIncorrectAnswers }  from '../../../redux/quiz/quizSlice'
-import styles from './Questions.module.css'
+import './Questions..css'
 
 function Questions() {
     const dispatch = useDispatch()
     const QuestionsToAsk = useSelector(getQuizQuestion)
+    console.log('QuestionsToAsk', QuestionsToAsk)
     const currentCorrect = useSelector(getCorrectAnswers)
     const currentWrong = useSelector(getIncorrectAnswers)
 
     const [currentQuestion, setCurrentQuestion] = useState(0)
-    let allAnswers = []
-    console.log(QuestionsToAsk)
+    const [selected, setSelected] = useState(false)
+//   const [correct, setCorrect] = useState()
 
     const handleClick = (event, newValue) => {
+        setSelected(false)
         setCurrentQuestion(prev => prev + 1)
     };
 
-    const handleAnswer = e => {
-        console.log('e', e.currentTarget.value)
-        if (e.currentTarget.value === 'Correct') {
+    const handleAnswer =  e => {
+        setSelected(true)
+        console.log('e.currentTarget.value', e.currentTarget.value)
+         console.log(' QuestionsToAsk[currentQuestion].correct_answer',  QuestionsToAsk[currentQuestion].correct_answer)
+        if (e.currentTarget.value === QuestionsToAsk[currentQuestion].correct_answer) {
             dispatch(setCorrectAnswers(currentCorrect + 1))
         } else {
             dispatch(setIncorrectAnswers(currentWrong + 1))
 
         }
-    }
+    } 
 
-    const makeQuestion = () => {
-        allAnswers = []
-        if (QuestionsToAsk.length > 0) {
-            if (QuestionsToAsk[currentQuestion].type === 'boolean') {
-                if (QuestionsToAsk[currentQuestion].correct_answer === 'True') {
-                    allAnswers.push({ answer: "True", stat: "Correct" })
-                    allAnswers.push({ answer: "False", stat: "Wrong" })
-                } else {
-                    allAnswers.push({ answer: "True", stat: "Wrong" })
-                    allAnswers.push({ answer: "False", stat: "Correct" })
-                }
-            } else {
-              
-                const numberOfAnswers = QuestionsToAsk[currentQuestion].incorrect_answers.length + 1
-                const correctChoice = Math.floor(Math.random() * numberOfAnswers)
-                console.log('correctChoice', correctChoice)
-                for (let i = 0; i < numberOfAnswers; i++) {
-                    if (i < correctChoice) {
-                        allAnswers.push({ answer: QuestionsToAsk[currentQuestion].incorrect_answers[i], stat: "Wrong" })
-                    }
-                    if (i === correctChoice) {
-                        allAnswers.push({ answer: QuestionsToAsk[currentQuestion].correct_answer, stat: "Correct" })
-                    }
-                    if (i > correctChoice) {
-                        allAnswers.push({ answer: QuestionsToAsk[currentQuestion].incorrect_answers[i - 1], stat: "Wrong" })
-                    }
-                    
-                   
-                }
-            }
-        }
-    }
-    
-
-    
+// const handleSelect = (answer) => {
+//     if (selected === answer && selected === correct) return "select";
+//     else if (selected === answer && selected !== correct) return "wrong";
+//     else if (answer === correct) return "select";
+//   };
 
     return (
-        <>
-           
-            <h3>Questions</h3>
-            <h3>{currentQuestion}</h3>
-            {makeQuestion()}
-            <button onClick={handleClick}> click</button>
-            {allAnswers.length > 0 &&
-                
-                <div>
-                    <h3>{QuestionsToAsk[currentQuestion].question}</h3>
-
-                    {allAnswers.map((answer, index) => {
-                        return (
-                            <button
-                                className={styles.button}
-                                key={index}
-                                value={answer.stat}
-                                onClick={handleAnswer}
-                            >
-                                {answer.answer}
-                            </button>
-                        )
-                    })};
-                </div>
-            }
-        </>
+         QuestionsToAsk.length > 0 &&
+                <>
             
+               
+                    <h3>Questions</h3>
+                    <h3>{currentQuestion + 1}</h3>
+                    <button onClick={handleClick} disabled={!selected}> click</button>
+                    {/* {setCorrect(QuestionsToAsk[currentQuestion].question)} */}
+                
+                    <div>
+                        <h3>{QuestionsToAsk[currentQuestion].question}</h3>
+
+                        {QuestionsToAsk[currentQuestion].answers.map((answer, index) => {
+                            return (
+                                <button
+                                    className={`button`} // ${selected && handleSelect(answer)}`}
+                                    key={index}
+                                value={answer}
+                                onClick={handleAnswer}
+                                    disabled={selected}
+                                >
+                                    {answer}
+                                </button>
+                            )
+                        })};
+                    </div>
+            
+                </>
+        
     )
 }
 
