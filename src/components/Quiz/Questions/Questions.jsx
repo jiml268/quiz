@@ -14,7 +14,7 @@ function Questions() {
 
     const [currentQuestion, setCurrentQuestion] = useState(0)
     const [selected, setSelected] = useState(false)
-//   const [correct, setCorrect] = useState()
+       const [correct, setCorrect] = useState()
 
     const handleClick = (event, newValue) => {
         setSelected(false)
@@ -23,6 +23,7 @@ function Questions() {
 
     const handleAnswer =  e => {
         setSelected(true)
+        setCorrect(e.currentTarget.value)
         console.log('e.currentTarget.value', e.currentTarget.value)
          console.log(' QuestionsToAsk[currentQuestion].correct_answer',  QuestionsToAsk[currentQuestion].correct_answer)
         if (e.currentTarget.value === QuestionsToAsk[currentQuestion].correct_answer) {
@@ -33,11 +34,11 @@ function Questions() {
         }
     } 
 
-// const handleSelect = (answer) => {
-//     if (selected === answer && selected === correct) return "select";
-//     else if (selected === answer && selected !== correct) return "wrong";
-//     else if (answer === correct) return "select";
-//   };
+const handleSelect = (answer) => {
+    if (correct === answer && correct === QuestionsToAsk[currentQuestion].correct_answer) return "select";
+    else if (correct === answer && correct !== QuestionsToAsk[currentQuestion].correct_answer) return "wrong";
+    else if (answer === QuestionsToAsk[currentQuestion].correct_answer) return "select";
+  };
 
     return (
          QuestionsToAsk.length > 0 &&
@@ -46,8 +47,8 @@ function Questions() {
                
                     <h3>Questions</h3>
                     <h3>{currentQuestion + 1}</h3>
-                    <button onClick={handleClick} disabled={!selected}> click</button>
-                    {/* {setCorrect(QuestionsToAsk[currentQuestion].question)} */}
+            <button onClick={handleClick} disabled={!selected}> click</button>
+                   
                 
                     <div>
                         <h3>{QuestionsToAsk[currentQuestion].question}</h3>
@@ -55,7 +56,7 @@ function Questions() {
                         {QuestionsToAsk[currentQuestion].answers.map((answer, index) => {
                             return (
                                 <button
-                                    className={`button`} // ${selected && handleSelect(answer)}`}
+                                    className={`button  ${selected && handleSelect(answer)}`}
                                     key={index}
                                 value={answer}
                                 onClick={handleAnswer}
