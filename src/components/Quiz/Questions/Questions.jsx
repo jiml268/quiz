@@ -1,16 +1,20 @@
-import { getQuizQuestion } from "../../../redux/quiz/quizSelectors"
 import { useSelector, useDispatch } from 'react-redux'
 import { useState } from "react"
-import {getCorrectAnswers, getIncorrectAnswers} from '../../../redux/quiz/quizSelectors'
+import { useNavigate } from "react-router-dom";
+import {getCorrectAnswers, getIncorrectAnswers, getQuizQuestion, getAskQuestions} from '../../../redux/quiz/quizSelectors'
 import { setCorrectAnswers, setIncorrectAnswers }  from '../../../redux/quiz/quizSlice'
 import './Questions..css'
 
 function Questions() {
     const dispatch = useDispatch()
+    const navigate = useNavigate();
     const QuestionsToAsk = useSelector(getQuizQuestion)
+    const numberOfQuestionsToAsk = useSelector(getAskQuestions)
+
     console.log('QuestionsToAsk', QuestionsToAsk)
     const currentCorrect = useSelector(getCorrectAnswers)
     const currentWrong = useSelector(getIncorrectAnswers)
+
 
     const [currentQuestion, setCurrentQuestion] = useState(0)
     const [selected, setSelected] = useState(false)
@@ -18,7 +22,11 @@ function Questions() {
 
     const handleClick = (event, newValue) => {
         setSelected(false)
-        setCurrentQuestion(prev => prev + 1)
+        if (currentQuestion < numberOfQuestionsToAsk - 1) {
+            setCurrentQuestion(prev => prev + 1)
+        } else {
+           navigate("/end") 
+        }
     };
 
     const handleAnswer =  e => {
@@ -47,7 +55,7 @@ const handleSelect = (answer) => {
                
                     <h3>Questions</h3>
                     <h3>{currentQuestion + 1}</h3>
-            <button onClick={handleClick} disabled={!selected}> click</button>
+           
                    
                 
                     <div>
@@ -67,7 +75,7 @@ const handleSelect = (answer) => {
                             )
                         })};
                     </div>
-            
+            <button className="nextQuestion" onClick={handleClick} disabled={!selected}> {currentQuestion < numberOfQuestionsToAsk-1 ? 'next question' : 'finish'}</button>
                 </>
         
     )

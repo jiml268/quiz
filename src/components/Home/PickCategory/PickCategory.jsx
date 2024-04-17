@@ -47,9 +47,10 @@ function PickCategory() {
           onChange={handleChange}
                  >
                      
- {showCats.length > 0 && showCats.map((cat, index) => {
+           {showCats.length > 0 && showCats.map((cat, index) => {
+   const catName = cat.name.split("Entertainment: ").pop()
         return (
-          <MenuItem key= {index} value={cat.id} >{cat.name}</MenuItem>
+          <MenuItem key= {index} value={cat.id} >{catName}</MenuItem>
         );
       })}
         </Select>

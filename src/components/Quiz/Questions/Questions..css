@@ -5,6 +5,11 @@
     margin:  10px;
 }
 
+.button:hover {
+background-color: darkorange;
+color: white;
+}
+
 .select {
     background-color: rgb(7, 207, 0);
     color: white;
@@ -15,4 +20,14 @@
     background-color: rgb(233, 0, 0);
     color: white;
     box-shadow: 0 0 1px black;
+}
+
+.nextQuestion{
+    padding: 15px 40px;
+    border-radius: 25%;
+}
+
+.nextQuestion:hover{
+    background-color: aqua;
+    color: azure;
 }
