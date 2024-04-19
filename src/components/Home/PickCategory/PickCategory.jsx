@@ -19,6 +19,7 @@ function PickCategory() {
     const [catPicked, setCatPicked] = useState('');
 
   const handleChange = (e) => {
+  
       setCatPicked(e.target.value);
     
     dispatch(setCategory(e.target.value))
@@ -50,7 +51,7 @@ function PickCategory() {
            {showCats.length > 0 && showCats.map((cat, index) => {
    const catName = cat.name.split("Entertainment: ").pop()
         return (
-          <MenuItem key= {index} value={cat.id} >{catName}</MenuItem>
+          <MenuItem key= {index} value={cat} >{catName}</MenuItem>
         );
       })}
         </Select>

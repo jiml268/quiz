@@ -1,8 +1,8 @@
 import { useDispatch, useSelector, } from 'react-redux'
-import { getCategoryPicked, getDifficultPicked, getAskQuestions } from '../../../redux/quiz/quizSelectors'
+import { getCategoryPicked, getDifficultPicked, getAskQuestions,  } from '../../../redux/quiz/quizSelectors'
 import { getQuestions } from '../../../redux/quiz/quizOperators';
 import { useNavigate } from "react-router-dom";
-import { setQuizQuestions } from '../../../redux/quiz/quizSlice';
+import { setQuizQuestions, setQuizComplete } from '../../../redux/quiz/quizSlice';
 
 import styles from './StartQuiz.module.css'
 
@@ -12,6 +12,7 @@ function StartQuiz() {
     const showCatsPicked = useSelector(getCategoryPicked)
     const showDiffivultPicked = useSelector(getDifficultPicked)
     const showQuestionCount = useSelector(getAskQuestions)
+
     let setDiff = ""
     if (showDiffivultPicked === 'Any') {
         setDiff = ""
@@ -21,15 +22,26 @@ function StartQuiz() {
 
 
     const handleClick = async (event) => {
-        const questionParms = { amount: showQuestionCount, cat_id: showCatsPicked, diff: setDiff}
+      
 
-        const respone = await dispatch(getQuestions(questionParms))
-        const returnQuestions = respone.payload.data
+
+        if (showCatsPicked.length === 0 || showQuestionCount === 0 || showDiffivultPicked === '') {
+             const message = showCatsPicked.length === 0 && showDiffivultPicked === '' ? "Please pick a Categorty and Difficulty level" :
+                showCatsPicked.length === 0 ? "Please pick a Category" : "Please pick a Difficulty level";
+
+
+          alert(message);
+        } else {
+            const questionParms = { amount: showQuestionCount, cat_id: showCatsPicked.id, diff: setDiff }
+
+            const respone = await dispatch(getQuestions(questionParms))
+            const returnQuestions = respone.payload.data
        
-        const setupQuestions = createquestions(returnQuestions)
-dispatch(setQuizQuestions(setupQuestions))
- console.log('setupQuestions', setupQuestions)
-    navigate("/questions")
+            const setupQuestions = createquestions(returnQuestions)
+            dispatch(setQuizQuestions(setupQuestions))
+            dispatch(setQuizComplete(false))
+            navigate("/questions")
+        }
     };
     
 

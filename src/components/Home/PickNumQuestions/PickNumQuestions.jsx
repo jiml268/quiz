@@ -18,8 +18,9 @@ function PickNumQuestions() {
   
 
     const dispatch = useDispatch()
-    const showCatsPicked = useSelector(getCategoryPicked)
-    const showDiffivultPicked = useSelector(getDifficultPicked)
+  const showCatsPicked = useSelector(getCategoryPicked)
+  const showDiffivultPicked = useSelector(getDifficultPicked)
+
     const showCatCount = useSelector(getAvailableQuestion)
     const [quizQuestion, setQuizQuestions] = useState(1)
  
@@ -43,13 +44,20 @@ function PickNumQuestions() {
   };
 
 
-    useEffect(() => {
+  useEffect(() => {
+           
+
         const fetchCount = async () => {
-            await dispatch(getCatCount({ cat_id: showCatsPicked, difficulty: showDiffivultPicked }));
-        }
-        fetchCount()
-            // make sure to catch any error
-            .catch(console.error);
+          await dispatch(getCatCount({ cat_id: showCatsPicked.id, difficulty: showDiffivultPicked }));
+          
+
+    }
+    if (showCatsPicked.id  && showDiffivultPicked !== "") {
+      fetchCount()
+    
+        // make sure to catch any error
+        .catch(console.error);
+    }
     }, [dispatch, showCatsPicked, showDiffivultPicked])
    
     useEffect(() => {

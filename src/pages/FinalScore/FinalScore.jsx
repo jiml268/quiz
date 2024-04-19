@@ -1,10 +1,16 @@
+import Heading from "../../components/FinalScore/Heading/Heading"
+import Scores from "../../components/FinalScore/Scores/Scores"
+import Buttons from "../../components/FinalScore/Buttons/Buttons"
+
 function FinalScore() {
 
    
 
  return (
      <>
-<h2>final score</h2>
+         < Heading />
+         < Scores />
+         <Buttons />
 </>         
  )
 }

@@ -1,8 +1,9 @@
 import { useSelector, useDispatch } from 'react-redux'
 import { useState } from "react"
 import { useNavigate } from "react-router-dom";
+
 import {getCorrectAnswers, getIncorrectAnswers, getQuizQuestion, getAskQuestions} from '../../../redux/quiz/quizSelectors'
-import { setCorrectAnswers, setIncorrectAnswers }  from '../../../redux/quiz/quizSlice'
+import { setCorrectAnswers, setIncorrectAnswers, setQuizComplete, }  from '../../../redux/quiz/quizSlice'
 import './Questions..css'
 
 function Questions() {
@@ -11,7 +12,6 @@ function Questions() {
     const QuestionsToAsk = useSelector(getQuizQuestion)
     const numberOfQuestionsToAsk = useSelector(getAskQuestions)
 
-    console.log('QuestionsToAsk', QuestionsToAsk)
     const currentCorrect = useSelector(getCorrectAnswers)
     const currentWrong = useSelector(getIncorrectAnswers)
 
@@ -25,6 +25,7 @@ function Questions() {
         if (currentQuestion < numberOfQuestionsToAsk - 1) {
             setCurrentQuestion(prev => prev + 1)
         } else {
+            dispatch(setQuizComplete(true))
            navigate("/end") 
         }
     };
@@ -32,8 +33,6 @@ function Questions() {
     const handleAnswer =  e => {
         setSelected(true)
         setCorrect(e.currentTarget.value)
-        console.log('e.currentTarget.value', e.currentTarget.value)
-         console.log(' QuestionsToAsk[currentQuestion].correct_answer',  QuestionsToAsk[currentQuestion].correct_answer)
         if (e.currentTarget.value === QuestionsToAsk[currentQuestion].correct_answer) {
             dispatch(setCorrectAnswers(currentCorrect + 1))
         } else {

@@ -6,4 +6,8 @@ export const getAskQuestions = (state) => state.quiz.askQuestions;
 export const getCorrectAnswers = (state) => state.quiz.correctAnswers;
 export const getIncorrectAnswers = (state) => state.quiz.incorrectAnswers;
 export const getQuizQuestion = (state) => state.quiz.quizQuestions;
+export const getIsLoading = (state) => state.quiz.isloading;
+
+export const getQuizComplete = (state) => state.quiz.quizComplete;
+
 
