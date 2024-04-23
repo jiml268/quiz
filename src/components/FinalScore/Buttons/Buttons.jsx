@@ -1,6 +1,6 @@
 import styles from './buttons.module.css'
 
-import { setCategory, setDifficult, setAskQuestions, setCorrectAnswers, setIncorrectAnswers, setQuizQuestions }
+import { setCategory, setDifficult, setAskQuestions, setCorrectAnswers, setIncorrectAnswers, setQuizQuestions, setAnswersPicked }
     from '../../../redux/quiz/quizSlice'
 import { getIsLoggenIn, } from '../../../redux/user/userSelectors';
 import { useNavigate } from "react-router-dom";
@@ -32,11 +32,13 @@ function Buttons() {
         dispatch(setCorrectAnswers(0))
         dispatch(setIncorrectAnswers(0))
         dispatch(setQuizQuestions([]))
+        dispatch(setAnswersPicked([]))
+
         navigate("/")
     }
 
     const clickReview = () => {
-     console.log('review clicked')
+     navigate("/review")
     }
 
 const clickTop = () => {

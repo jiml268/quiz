@@ -2,8 +2,8 @@ import { useSelector, useDispatch } from 'react-redux'
 import { useState } from "react"
 import { useNavigate } from "react-router-dom";
 
-import {getCorrectAnswers, getIncorrectAnswers, getQuizQuestion, getAskQuestions} from '../../../redux/quiz/quizSelectors'
-import { setCorrectAnswers, setIncorrectAnswers, setQuizComplete, }  from '../../../redux/quiz/quizSlice'
+import {getCorrectAnswers, getIncorrectAnswers, getQuizQuestion, getAskQuestions,  } from '../../../redux/quiz/quizSelectors'
+import { setCorrectAnswers, setIncorrectAnswers, setQuizComplete, setAnswersPicked  }  from '../../../redux/quiz/quizSlice'
 import './Questions..css'
 
 function Questions() {
@@ -11,14 +11,12 @@ function Questions() {
     const navigate = useNavigate();
     const QuestionsToAsk = useSelector(getQuizQuestion)
     const numberOfQuestionsToAsk = useSelector(getAskQuestions)
-
     const currentCorrect = useSelector(getCorrectAnswers)
     const currentWrong = useSelector(getIncorrectAnswers)
-
-
     const [currentQuestion, setCurrentQuestion] = useState(0)
     const [selected, setSelected] = useState(false)
-       const [correct, setCorrect] = useState()
+    const [correct, setCorrect] = useState()
+
 
     const handleClick = (event, newValue) => {
         setSelected(false)
@@ -30,7 +28,7 @@ function Questions() {
         }
     };
 
-    const handleAnswer =  e => {
+    const handleAnswer = e => {
         setSelected(true)
         setCorrect(e.currentTarget.value)
         if (e.currentTarget.value === QuestionsToAsk[currentQuestion].correct_answer) {
@@ -39,6 +37,9 @@ function Questions() {
             dispatch(setIncorrectAnswers(currentWrong + 1))
 
         }
+        const currentAnswer = { question: currentQuestion, answer: e.currentTarget.value }
+        dispatch(setAnswersPicked(currentAnswer))
+        
     } 
 
 const handleSelect = (answer) => {

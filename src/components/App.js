@@ -4,6 +4,7 @@ import Home from '../pages/Home/Home'
 
 import Quiz from '../pages/Quiz/Quiz';
 import FinalScore from '../pages/FinalScore/FinalScore';
+import Review from '../pages/Review/Review';
 function App() {
 
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/questions" element={<Quiz />} />
         <Route path="/end" element={<FinalScore />} />
+        <Route path="/review" element={<Review />} />
         <Route path="*" element={<p>Path not resolved</p>} />
        </Routes>
       </div>

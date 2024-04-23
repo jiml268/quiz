@@ -6,19 +6,14 @@ const initialState = {
   CategoryCount: [],
   quizQuestions: [],
   isloading: false,
-  // categoryPicked: 9,
     categoryPicked: [],
-
-  // difficultPicked: "Any",
   difficultPicked: "",
-
-  availableQuestion: 0,
+availableQuestion: 0,
   askQuestions: 1,
-   
-
   correctAnswers: 0,
   incorrectAnswers: 0,
-  quizComplete: false
+  quizComplete: true,
+  answersPicked:[]
 };
 
 const quizSlice = createSlice({
@@ -30,22 +25,27 @@ const quizSlice = createSlice({
     },
     setDifficult: (state, action) => {
       state.difficultPicked = action.payload;
-          },
-     setAskQuestions: (state, action) => {
+    },
+    setAskQuestions: (state, action) => {
       state.askQuestions = action.payload;
     },
-     setCorrectAnswers: (state, action) => {
+    setCorrectAnswers: (state, action) => {
       state.correctAnswers = action.payload;
     },
-     setIncorrectAnswers: (state, action) => {
+    setIncorrectAnswers: (state, action) => {
       state.incorrectAnswers = action.payload;
     },
-     setQuizQuestions: (state, action) => {
+    setQuizQuestions: (state, action) => {
       state.quizQuestions = action.payload;
     },
-     setQuizComplete: (state, action) => {
+    setQuizComplete: (state, action) => {
       state.quizComplete = action.payload;
     },
+    setAnswersPicked: (state, action) => {
+      
+       state.answersPicked.push(action.payload);
+      
+    }
   },
   extraReducers: (builder) =>
     builder
@@ -117,6 +117,7 @@ const quizSlice = createSlice({
         state.isloading = false;
       }),
 });
-export const { setCategory, setDifficult, setAskQuestions, setCorrectAnswers, setIncorrectAnswers, setQuizQuestions, setQuizComplete } = quizSlice.actions;
+export const { setCategory, setDifficult, setAskQuestions, setCorrectAnswers, setIncorrectAnswers, setQuizQuestions, setQuizComplete,
+setAnswersPicked} = quizSlice.actions;
 
 export const quizReducer = quizSlice.reducer;

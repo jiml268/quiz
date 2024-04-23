@@ -1,0 +1,19 @@
+.home{
+    padding: 15px;
+    margin: 10px;
+    border-radius: 25%;
+}
+
+.home:hover{
+    background-color: aquamarine;
+    color: blanchedalmond;
+}
+
+.reviewButtons{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+
+   
