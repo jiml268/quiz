@@ -1,5 +1,7 @@
 .button{
      padding: 15px;
+        margin: 0 15px;
+            border-radius: 25px;
 }
 
 .button:hover{
@@ -12,3 +14,5 @@
     flex-direction: row;
     margin: 5px;
 }
+
+.noTop{display: none;}

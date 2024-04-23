@@ -12,7 +12,7 @@ availableQuestion: 0,
   askQuestions: 1,
   correctAnswers: 0,
   incorrectAnswers: 0,
-  quizComplete: true,
+  quizComplete: false,
   answersPicked:[]
 };
 
@@ -40,12 +40,15 @@ const quizSlice = createSlice({
     },
     setQuizComplete: (state, action) => {
       state.quizComplete = action.payload;
+
     },
     setAnswersPicked: (state, action) => {
       
        state.answersPicked.push(action.payload);
-      
-    }
+    },
+   resetState: state => initialState,
+
+    
   },
   extraReducers: (builder) =>
     builder
@@ -118,6 +121,6 @@ const quizSlice = createSlice({
       }),
 });
 export const { setCategory, setDifficult, setAskQuestions, setCorrectAnswers, setIncorrectAnswers, setQuizQuestions, setQuizComplete,
-setAnswersPicked} = quizSlice.actions;
+setAnswersPicked, resetState} = quizSlice.actions;
 
 export const quizReducer = quizSlice.reducer;

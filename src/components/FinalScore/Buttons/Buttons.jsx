@@ -1,22 +1,20 @@
 import styles from './buttons.module.css'
 
-import { setCategory, setDifficult, setAskQuestions, setCorrectAnswers, setIncorrectAnswers, setQuizQuestions, setAnswersPicked }
+import { resetState,  }
     from '../../../redux/quiz/quizSlice'
-import { getIsLoggenIn, } from '../../../redux/user/userSelectors';
 import { useNavigate } from "react-router-dom";
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux'
 import { useEffect, useState } from 'react';
-
+import { getIsLoggedIn } from '../../../redux/user/userSelectors';
 
 function Buttons() {
 
     const dispatch = useDispatch()
     const navigate = useNavigate();
-    
+    const personLoggedIn = useSelector(getIsLoggedIn)
 
     const [showTop, setShowTop] = useState(false)
-    const personLoggedIn = useSelector(getIsLoggenIn)
       useEffect(() => {
        setShowTop(personLoggedIn)
     }, [personLoggedIn])
@@ -26,14 +24,7 @@ function Buttons() {
 
     const clickAgain = () => {
        
-        dispatch(setCategory([]))
-        dispatch(setDifficult(""))
-        dispatch(setAskQuestions(1))
-        dispatch(setCorrectAnswers(0))
-        dispatch(setIncorrectAnswers(0))
-        dispatch(setQuizQuestions([]))
-        dispatch(setAnswersPicked([]))
-
+        dispatch(resetState())
         navigate("/")
     }
 
@@ -52,11 +43,13 @@ const clickTop = () => {
          >review Quiz</button>
           <button className={styles.button} onClick={clickAgain}
          >Play Again</button>
-         <button className={styles.button} onClick={clickTop} style={{ display: { showTop } }}
+         <button className={`${styles.button} ${personLoggedIn ? "" : styles.noTop}`}  onClick={clickTop} style={{ display: { showTop } }}
          >Top Scores</button>
      </div>
  )
 }
+
+
 
 export default Buttons
 

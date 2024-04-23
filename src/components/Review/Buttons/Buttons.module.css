@@ -5,8 +5,8 @@
 }
 
 .home:hover{
-    background-color: aquamarine;
-    color: blanchedalmond;
+    background-color: rgb(85, 49, 248);
+    color: #fff;
 }
 
 .reviewButtons{
@@ -16,4 +16,14 @@
 }
 
 
-   
+   .prev_next{
+    padding: 10px;
+    border-radius: 50%;
+    height: 70px;
+        width: 70px;
+   }
+
+   .prev_next:hover{
+    background-color: rgb(85, 49, 248);
+        color: #fff;
+   }

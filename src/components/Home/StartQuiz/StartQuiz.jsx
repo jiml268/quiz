@@ -2,7 +2,7 @@ import { useDispatch, useSelector, } from 'react-redux'
 import { getCategoryPicked, getDifficultPicked, getAskQuestions,  } from '../../../redux/quiz/quizSelectors'
 import { getQuestions } from '../../../redux/quiz/quizOperators';
 import { useNavigate } from "react-router-dom";
-import { setQuizQuestions, setQuizComplete } from '../../../redux/quiz/quizSlice';
+import { setQuizQuestions,  } from '../../../redux/quiz/quizSlice';
 
 import styles from './StartQuiz.module.css'
 
@@ -39,7 +39,9 @@ function StartQuiz() {
        
             const setupQuestions = createquestions(returnQuestions)
             dispatch(setQuizQuestions(setupQuestions))
-            dispatch(setQuizComplete(false))
+
+            // dispatch(setQuizComplete(false))
+
             navigate("/questions")
         }
     };
