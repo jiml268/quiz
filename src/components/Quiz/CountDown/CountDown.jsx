@@ -1,110 +1,66 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector,  } from 'react-redux'
 
-import { getAskQuestions, getQuizComplete } from "../../../redux/quiz/quizSelectors";
-import { setQuizComplete, }  from '../../../redux/quiz/quizSlice'
+import { getAskQuestions,  } from "../../../redux/quiz/quizSelectors";
 
 import styles from './CountDown.module.css'
 
 function CountDown() {
-    const dispatch = useDispatch()
-  const Ref = useRef(null);
-    const navigate = useNavigate();
+     const navigate = useNavigate();
     const questionCnt = useSelector(getAskQuestions)
-    const isQuizzComplete = useSelector(getQuizComplete)
+    const [num, setNum] = useState(questionCnt*30);
+ const [timer, setTimer] = useState("00:00:00");
+  
+  let intervalRef = useRef();
+  
+    
 
-    const totalTime = questionCnt*30
-
-  const [timer, setTimer] = useState("00:00:00");
-
-  const getTimeRemaining = (e) => {
-        const total =
-            Date.parse(e) - Date.parse(new Date());
-        const seconds = Math.floor((total / 1000) % 60);
+    useEffect(() => {
+      
+const decreaseNum = () => {
+        const total = num - 1
+    if (total >= 0) {
+        setNum((prev) => prev - 1);
+        const seconds = Math.floor((total) % 60);
         const minutes = Math.floor(
-            (total / 1000 / 60) % 60
+            (total / 60) % 60
         );
         const hours = Math.floor(
-            (total / 1000 / 60 / 60) % 24
+            (total / 60 / 60) % 24
         );
-        return {
-            total,
-            hours,
-            minutes,
-            seconds,
-        };
-    };
- 
-   
-    useEffect(() => {
+        setTimer(
+            (hours > 9 ? hours : "0" + hours) +
+            ":" +
+            (minutes > 9
+                ? minutes
+                : "0" + minutes) +
+            ":" +
+            (seconds > 9 ? seconds : "0" + seconds)
+        );
+        console.log('decreaseNum ran')
+    } else {
+        clearInterval(intervalRef.current);
+         navigate("/end")
+    }
+    }
 
-           const getDeadTime = () => {
-        let deadline = new Date();
- 
-       
-        deadline.setSeconds(deadline.getSeconds() + totalTime);
-        return deadline;
-    };
-       
+    intervalRef.current = setInterval(decreaseNum, 1000);
 
-         const startTimer = (e) => {
-        let { total, hours, minutes, seconds } =
-            getTimeRemaining(e);
-        if (total >= 0) {
-            if (!isQuizzComplete) {
-              
-                setTimer(
-                    (hours > 9 ? hours : "0" + hours) +
-                    ":" +
-                    (minutes > 9
-                        ? minutes
-                        : "0" + minutes) +
-                    ":" +
-                    (seconds > 9 ? seconds : "0" + seconds)
-                );
-            } else {
-                if (Ref.current) clearInterval(Ref.current); 
-            }    
-        }else {
-                dispatch(setQuizComplete(true))
-                if (Ref.current) clearInterval(Ref.current);
-                    navigate("/end")
-            
-            }
-    };
- 
-        
-        const clearTimer = (e) => {
-      
-        setTimer(`00:00:${totalTime}`);;
- 
-       
-        if (Ref.current) clearInterval(Ref.current);
-        const id = setInterval(() => {
-            startTimer(e);
-        }, 1000);
-        Ref.current = id;
-        };
-        
-         if (!isQuizzComplete) {
-            clearTimer(getDeadTime());
-        }
-    }, [isQuizzComplete,  dispatch, totalTime,navigate, ]);
+    return () => clearInterval(intervalRef.current);
+  }, [num, navigate]);
+  
  
   
-   return (
-        <div
+  return (
+     <div
             style={{ textAlign: "center" }}>
            
             <h3>Remaining Time</h3>
             <p className={styles.counterBox}>{timer}</p>
             
         </div>
-    );
-  
-  
-
+  );
 };
 
 export default CountDown
