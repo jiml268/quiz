@@ -1,4 +1,5 @@
 import styles from './buttons.module.css'
+import {  getAnswersPicked } from "../../../redux/quiz/quizSelectors"
 
 import { resetState,  }
     from '../../../redux/quiz/quizSlice'
@@ -13,7 +14,8 @@ function Buttons() {
     const dispatch = useDispatch()
     const navigate = useNavigate();
     const personLoggedIn = useSelector(getIsLoggedIn)
-
+    const quizAnswersPicked = useSelector(getAnswersPicked)
+    const wasQuestionAnsered = quizAnswersPicked.length > 0
     const [showTop, setShowTop] = useState(false)
       useEffect(() => {
        setShowTop(personLoggedIn)
@@ -39,7 +41,7 @@ const clickTop = () => {
 
  return (
      <div className={styles.allButtons}>
-         <button className={styles.button} onClick={clickReview}
+         <button className={styles.button} onClick={clickReview} disabled={!wasQuestionAnsered}
          >review Quiz</button>
           <button className={styles.button} onClick={clickAgain}
          >Play Again</button>

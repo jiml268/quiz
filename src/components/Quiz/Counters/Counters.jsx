@@ -16,7 +16,7 @@ function Counters() {
                 <p className={styles.counterBox}>{correct}</p>
             </div>
             <div className={styles.counterGroup}>
-                <h3>InCorrect</h3>
+                <h3>Incorrect</h3>
                 <p className={styles.counterBox}>{incorrect}</p>
             </div>
              <div className={styles.counterGroup}>

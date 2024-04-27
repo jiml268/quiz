@@ -5,6 +5,14 @@ import { useNavigate } from "react-router-dom";
 import {getCorrectAnswers, getIncorrectAnswers, getQuizQuestion, getAskQuestions,  } from '../../../redux/quiz/quizSelectors'
 import { setCorrectAnswers, setIncorrectAnswers, setQuizComplete, setAnswersPicked  }  from '../../../redux/quiz/quizSlice'
 import './Questions..css'
+import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+import { resetState}
+    from '../../../redux/quiz/quizSlice'
 
 function Questions() {
     const dispatch = useDispatch()
@@ -16,7 +24,19 @@ function Questions() {
     const [currentQuestion, setCurrentQuestion] = useState(0)
     const [selected, setSelected] = useState(false)
     const [correct, setCorrect] = useState()
+    const [open, setOpen] = useState(false);
+    
+    const handleClickOpen = () => {
+    setOpen(true);
+  };
 
+  const handleClose = (e) => {
+      setOpen(false);
+      if (e.currentTarget.value === "Agree") {
+          dispatch(resetState())
+           navigate("/")
+      }
+  };
 
     const handleClick = (event, newValue) => {
         setSelected(false)
@@ -64,7 +84,7 @@ const handleSelect = (answer) => {
                         {QuestionsToAsk[currentQuestion].answers.map((answer, index) => {
                             return (
                                 <button
-                                    className={`button  ${selected && handleSelect(answer)}`}
+                                    className={`${!selected && 'button'} ${selected && 'buttonNoHover'} ${selected && handleSelect(answer)} ${selected && "nopointer"}`}
                                     key={index}
                                 value={answer}
                                 onClick={handleAnswer}
@@ -73,10 +93,34 @@ const handleSelect = (answer) => {
                                     {answer}
                                 </button>
                             )
-                        })};
+                        })}
                     </div>
-            <button className="nextQuestion" onClick={handleClick} disabled={!selected}> {currentQuestion < numberOfQuestionsToAsk-1 ? 'next question' : 'finish'}</button>
-                </>
+           
+         <button className="nextQuestion" onClick={handleClick} disabled={!selected}> {currentQuestion < numberOfQuestionsToAsk - 1 ? 'next question' : 'finish'}</button>
+         <button className="nextQuestion" onClick={handleClickOpen} > Quit Quiz</button>
+           <Dialog
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">{"Quit Current Quiz?"}</DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            Are you sure you want to quit the current Quiz
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose} value= "Disagree" color="primary">
+            Disagree
+          </Button>
+          <Button onClick={handleClose} value= "Agree" color="primary" autoFocus>
+            Agree
+          </Button>
+        </DialogActions>
+      </Dialog>
+         
+        </>
         
     )
 }

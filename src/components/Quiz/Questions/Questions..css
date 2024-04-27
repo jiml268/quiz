@@ -5,6 +5,13 @@
     margin:  10px;
 }
 
+.buttonNoHover {
+    width: 60%;
+    padding: 20px 35px;
+    border-radius: 10%;
+    margin: 10px;
+}
+
 .button:hover {
 background-color: darkorange;
 color: white;
@@ -25,9 +32,16 @@ color: white;
 .nextQuestion{
     padding: 15px 40px;
     border-radius: 25%;
+    margin-left: 10px;
 }
 
 .nextQuestion:hover{
     background-color: aqua;
     color: azure;
+}
+
+.nopointer{
+    pointer-events: none;
+    color: inherit;
+        text-decoration: inherit;
 }
