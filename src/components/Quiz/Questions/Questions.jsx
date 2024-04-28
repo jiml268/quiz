@@ -67,8 +67,7 @@ const handleSelect = (answer) => {
     else if (correct === answer && correct !== QuestionsToAsk[currentQuestion].correct_answer) return "wrong";
     else if (answer === QuestionsToAsk[currentQuestion].correct_answer) return "select";
   };
-
-    return (
+ return (
          QuestionsToAsk.length > 0 &&
                 <>
             
@@ -78,8 +77,8 @@ const handleSelect = (answer) => {
            
                    
                 
-                    <div>
-                        <h3>{QuestionsToAsk[currentQuestion].question}</h3>
+            <div>
+                <h3>{QuestionsToAsk[currentQuestion].question}</h3>
 
                         {QuestionsToAsk[currentQuestion].answers.map((answer, index) => {
                             return (

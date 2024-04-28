@@ -36,8 +36,10 @@ function StartQuiz() {
 
             const respone = await dispatch(getQuestions(questionParms))
             const returnQuestions = respone.payload.data
-       
+                   console.log('returnQuestions', returnQuestions)
+
             const setupQuestions = createquestions(returnQuestions)
+            console.log('setupQuestions', setupQuestions)
             dispatch(setQuizQuestions(setupQuestions))
 
             // dispatch(setQuizComplete(false))
@@ -46,6 +48,20 @@ function StartQuiz() {
         }
     };
     
+
+     function convertHTML(str) {
+        const symbols = {
+    "&#039;": "'",
+    "&quot;": '"'
+  }
+  let newStr = str
+  for (const symbol in symbols) {
+    if (str.indexOf(symbol) >= 0) {
+      newStr = str.replaceAll(symbol, symbols[symbol])
+    }
+  }
+   return newStr;
+}
 
     const createquestions = (returnQuestions) => {
         const allQuestion = []
@@ -72,7 +88,7 @@ function StartQuiz() {
                 }
             }
             const shuffledAnsweres =  answers.length > 2 ? answers.sort((a, b) => 0.5 - Math.random()): answers
-            const currentQuestion = { correct_answer: item.correct_answer, question: item.question, answers: shuffledAnsweres }
+            const currentQuestion = { correct_answer: item.correct_answer, question: convertHTML(item.question), answers: shuffledAnsweres }
             allQuestion.push(currentQuestion)   
             return allQuestion
         })
