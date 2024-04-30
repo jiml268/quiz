@@ -1,18 +1,18 @@
 {
   "files": {
-    "main.css": "/quiz/static/css/main.5c2a9b3a.css",
-    "main.js": "/quiz/static/js/main.d4fba867.js",
+    "main.css": "/quiz/static/css/main.821bef65.css",
+    "main.js": "/quiz/static/js/main.502a3c3e.js",
     "static/js/453.e10e82b0.chunk.js": "/quiz/static/js/453.e10e82b0.chunk.js",
     "static/media/2384075.webp": "/quiz/static/media/2384075.4bfabd6309d62c5714d7.webp",
     "index.html": "/quiz/index.html",
     "static/media/next-arrow-forward.svg": "/quiz/static/media/next-arrow-forward.c7933712298b78886ac760a05ec34c1b.svg",
     "static/media/previous-arrow-backward.svg": "/quiz/static/media/previous-arrow-backward.0b495bb0a7af756866e641091eca5eb9.svg",
-    "main.5c2a9b3a.css.map": "/quiz/static/css/main.5c2a9b3a.css.map",
-    "main.d4fba867.js.map": "/quiz/static/js/main.d4fba867.js.map",
+    "main.821bef65.css.map": "/quiz/static/css/main.821bef65.css.map",
+    "main.502a3c3e.js.map": "/quiz/static/js/main.502a3c3e.js.map",
     "453.e10e82b0.chunk.js.map": "/quiz/static/js/453.e10e82b0.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.5c2a9b3a.css",
-    "static/js/main.d4fba867.js"
+    "static/css/main.821bef65.css",
+    "static/js/main.502a3c3e.js"
   ]
 }
