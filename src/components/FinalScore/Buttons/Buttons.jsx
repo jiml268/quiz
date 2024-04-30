@@ -35,7 +35,7 @@ function Buttons() {
     }
 
 const clickTop = () => {
-      console.log('Top score clicked')
+      navigate("/TopScores")
     }
 
 

@@ -38,7 +38,6 @@ const decreaseNum = () => {
             ":" +
             (seconds > 9 ? seconds : "0" + seconds)
         );
-        console.log('decreaseNum ran')
     } else {
         clearInterval(intervalRef.current);
          navigate("/end")

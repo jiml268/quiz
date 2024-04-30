@@ -36,10 +36,8 @@ function StartQuiz() {
 
             const respone = await dispatch(getQuestions(questionParms))
             const returnQuestions = respone.payload.data
-                   console.log('returnQuestions', returnQuestions)
 
             const setupQuestions = createquestions(returnQuestions)
-            console.log('setupQuestions', setupQuestions)
             dispatch(setQuizQuestions(setupQuestions))
 
             // dispatch(setQuizComplete(false))
