@@ -1,8 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
-
+import { usersLogin, userRegister, userLogout  } from "./userOperators";
 
 const initialState = {
-    isLoggedIn: true
+  isLoggedIn: false,
+  isloading: false
 };
 
 const userSlice = createSlice({
@@ -16,7 +17,40 @@ const userSlice = createSlice({
   },
   extraReducers: (builder) =>
     builder
+  .addCase(usersLogin.pending, (state, action) => {
+        state.isloading = true;
+      })
+
+      .addCase(usersLogin.fulfilled, (state, action) => {
+        
+        state.isloading = false;
+      })
+      .addCase(usersLogin.rejected, (state, action) => {
+        state.isloading = false;
+      })
      
+   .addCase(userRegister.pending, (state, action) => {
+        state.isloading = true;
+      })
+
+      .addCase(userRegister.fulfilled, (state, action) => {
+        
+        state.isloading = false;
+      })
+      .addCase(userRegister.rejected, (state, action) => {
+        state.isloading = false;
+      })
+  .addCase(userLogout.pending, (state, action) => {
+        state.isloading = true;
+      })
+
+      .addCase(userLogout.fulfilled, (state, action) => {
+        state.isLoggedIn = false;
+        state.isloading = false;
+      })
+      .addCase(userLogout.rejected, (state, action) => {
+        state.isloading = false;
+      })
 });
 export const { setIsLoggedIn, } = userSlice.actions;
 

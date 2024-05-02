@@ -11,7 +11,6 @@ function HighScores() {
     const [scoresToShow, setScoresToShow] = useState([])
     const CategoryPicked = useSelector(getCategoryPicked)
     const currentUser = "testuser"
-    const currentCat = "Sportsa"
 
 
     const catClicked = (e) => {
@@ -30,12 +29,12 @@ function HighScores() {
             if (showUser === "All") {
 
                 const filtered = scoresReceived.filter(user => {
-                    return user.category === currentCat
+                    return user.category === CategoryPicked
                 })
                 setScoresToShow(filtered)
             } else {
                 const filtered = scoresReceived.filter(user => {
-                    return user.username === currentUser  && user.category === currentCat
+                    return user.username === currentUser  && user.category === CategoryPicked
                 })
                 setScoresToShow(filtered)
             }
@@ -49,7 +48,7 @@ function HighScores() {
                 setScoresToShow(scoresReceived)
             } else {
                 const filtered = scoresReceived.filter(user => {
-                    return user.category === currentCat
+                    return user.category === CategoryPicked
                 })
                 setScoresToShow(filtered)
             }
@@ -63,7 +62,7 @@ function HighScores() {
                 setScoresToShow(filtered)
             } else {
                 const filtered = scoresReceived.filter(user => {
-                    return user.username === currentUser  && user.category === currentCat
+                    return user.username === currentUser  && user.category === CategoryPicked
                 })
                 setScoresToShow(filtered)
             }
@@ -77,7 +76,6 @@ function HighScores() {
 
         const fetchHigh = async () => {
             const allScores = await dispatch(getScores());
-            console.log('allScores.payload', allScores.payload)
             setScoresReceived(allScores.payload)
             setScoresToShow(allScores.payload)
          }
@@ -89,7 +87,6 @@ function HighScores() {
     return (
         
         <>  
-            {console.log('scoresToShow', scoresToShow)}
             <div className={styles.buttonDiv}>
                 {/* <h3>Categoty</h3> */}
                 <button onClick={catClicked} value="All" className={`${styles.button} ${showCat==="All" && styles.active}`}> All Categories</button>
@@ -106,7 +103,7 @@ function HighScores() {
                 <h2 className={styles.userHeader}> High Scores for user:  {showUser === "All" ? "All Users" : currentUser } </h2>
             </div>
  <div>
-                <h2 className={styles.categoryHeader}> Category: {showCat === "All" ? "All Categories" : currentCat } </h2>
+                <h2 className={styles.categoryHeader}> Category: {showCat === "All" ? "All Categories" : CategoryPicked } </h2>
             </div>
 
             {scoresToShow.length > 0 ?

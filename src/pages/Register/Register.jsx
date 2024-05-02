@@ -1,9 +1,27 @@
-import { Grid,Paper, Avatar, TextField, Button, Typography,Link } from '@material-ui/core'
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import Avatar from '@mui/material/Avatar';
+import Button from '@mui/material/Button';
+import CssBaseline from '@mui/material/CssBaseline';
+import TextField from '@mui/material/TextField';
+import Link from '@mui/material/Link';
+import Grid from '@mui/material/Grid';
+import Box from '@mui/material/Box';
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import Typography from '@mui/material/Typography';
+import Container from '@mui/material/Container';
+import Joi from "joi-browser";
+ import {  toast } from 'react-toastify';
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { userRegister } from '../../redux/user/userOperators';
 
-const Register=()=>{
+const Register = () => {
+    const dispatch = useDispatch()
     const [account, setAccount] = useState({ user: "", password: "", email: "" });
+    const schema = {
+        user: Joi.string().min(4).max(20).required(),
+        email: Joi.string().email().required(),
+        password: Joi.string().min(8).max(20).required(),
+    };
     
     const handleChange = e => {
         const { name, value } = e.target;
@@ -11,37 +29,169 @@ const Register=()=>{
     }
 
 
-    const handelLogin = (e)=>{
-      e.preventDefault();
-  };
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        const result = Joi.validate(account, schema, {
+            abortEarly: false,
+        });
+        const { error } = result;
+      if (!error) {
+           const { user, password, email } = account;
+            const createdUser = { username: user, password: password, email: email }
+            const result = await dispatch(userRegister(createdUser))
+        console.log(result)
+        console.log("result.payload.data.code", result.payload.data.code)
+                console.log("result.payload.data.code===200", result.payload.data.code===200)
+
+        if (result.payload.data.code === 201) {
+          setAccount({ user: "", password: "", email: "" })
+          toast.success("Account Created", {
+            position: "top-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+
+          });
+        }
+        if (result.payload.data.code === 200) {
+          console.log(result.payload.data.message)
+          toast.warning(result.payload.data.data.message, {
+            position: "top-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+
+          });
+        }
+           
+            return;
+        } else {
+            let ErrorMessage = "Please Correct the following issues"
+            let userError = ""
+            let emailError = ""
+            let passwordError=""
+            let prevError = ""
+            error.details.map((item) => {
+                if (item.path[0] !== prevError){
+                    prevError = item.path[0]
+                    item.path[0] === "user" ?userError = "  User must be between 4 and 20 in lenght." :
+                        item.path[0] === "email" ? emailError = "Email must be a valid email." :
+                        passwordError = "Password must be between 8 and 20 in lenght."
+                }
+                return item
+            })
+          
+            const combinedError = `${ErrorMessage}
+            ${userError !== "" ? userError:""}
+            ${emailError !== "" ? emailError:""}
+            ${passwordError !== "" ? passwordError:""}
+            `
+            console.log(combinedError)
+           toast.error(combinedError, {
+                position: "top-center",
+autoClose: 5000,
+hideProgressBar: false,
+closeOnClick: true,
+pauseOnHover: true,
+draggable: true,
+progress: undefined,
+theme: "colored",
+
+            });
+          }
+    }
    
-    return(
-        <Grid>
-            <Paper >
-                <Grid align='center'>
-                     <Avatar ><LockOutlinedIcon/></Avatar>
-                    <h2>Sign In</h2>
-                </Grid>
-                <TextField label='Username' placeholder='Enter Username' fullWidth required  value={account.user}
-                    onChange={handleChange} name="userOrEmail" />
-                <TextField label='email' placeholder='Enter Email' fullWidth required  value={account.email}
-              onChange={handleChange} name="email"/>
-                <TextField label='Password' placeholder='Enter password' type='password' fullWidth required value={account.password}
-              onChange={handleChange} name="password"/>
-               
-                <Button type='submit' color='primary' variant="contained"  fullWidth onClick = {handelLogin}>Sign in</Button>
-                {/* <Typography >
-                     <Link href="#" >
-                        Forgot password ?
+    return (
+    
+        <Container component="main" maxWidth="xs">
+        <CssBaseline />
+        <Box
+          sx={{
+            marginTop: 8,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+          }}
+        >
+          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+            <LockOutlinedIcon />
+          </Avatar>
+          <Typography component="h1" variant="h5">
+            Sign up
+          </Typography>
+          <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+            <Grid container spacing={2}>
+              <Grid item xs={12}>
+                <TextField
+                  name="user"
+                  required
+                  fullWidth
+                  id="user"
+                  label="User"              
+                autoFocus
+                  value={account.user}
+                  onChange={handleChange}
+                  helperText="Must be between 4 & 20 in length."
+                  autoComplete="User"            
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  fullWidth
+                  id="email"
+                  label="Email Address"
+                  name="email"
+                autoComplete="email"
+                                value={account.email}
+                                                                onChange={handleChange}
+
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  fullWidth
+                  name="password"
+                  label="Password"
+                  type="password"
+                  id="password"
+                                autoComplete="new-password"
+                                value={account.password}
+                                onChange={handleChange}
+                                                                 helperText="Must be between 8 & 20 in length."
+
+
+                />
+              </Grid>
+            </Grid>
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              sx={{ mt: 3, mb: 2 }}
+            >
+              Sign Up
+            </Button>
+            <Grid container justifyContent="flex-end">
+              <Grid item>
+                <Link href="#" variant="body2">
+                  Already have an account? Sign in
                 </Link>
-                </Typography> */}
-                <Typography > Already have an account?
-                     <Link href="#" >
-                        Sign In
-                </Link>
-                </Typography>
-            </Paper>
-        </Grid>
+              </Grid>
+            </Grid>
+          </Box>
+        </Box>
+        
+      </Container>  
     )
 }
 

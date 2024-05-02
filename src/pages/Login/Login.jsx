@@ -1,5 +1,13 @@
-import { Grid,Paper, Avatar, TextField, Button, Typography,Link } from '@material-ui/core'
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import Avatar from '@mui/material/Avatar';
+import Button from '@mui/material/Button';
+import CssBaseline from '@mui/material/CssBaseline';
+import TextField from '@mui/material/TextField';
+import Link from '@mui/material/Link';
+import Grid from '@mui/material/Grid';
+import Box from '@mui/material/Box';
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import Typography from '@mui/material/Typography';
+import Container from '@mui/material/Container';
 import { useState } from 'react';
 
 const Login=()=>{
@@ -11,35 +19,76 @@ const Login=()=>{
     }
 
 
-    const handelLogin = (e)=>{
+    const handleSubmit = (e)=>{
       e.preventDefault();
   };
    
     return(
-        <Grid>
-            <Paper >
-                <Grid align='center'>
-                     <Avatar ><LockOutlinedIcon/></Avatar>
-                    <h2>Sign In</h2>
-                </Grid>
-                <TextField label='Username or Email' placeholder='Enter username or Email' fullWidth required  value={account.userOrEmail}
-              onChange={handleChange} name="userOrEmail"/>
-                <TextField label='Password' placeholder='Enter password' type='password' fullWidth required value={account.password}
-              onChange={handleChange} name="password"/>
-               
-                <Button type='submit' color='primary' variant="contained"  fullWidth onClick = {handelLogin}>Sign in</Button>
-                {/* <Typography >
-                     <Link href="#" >
-                        Forgot password ?
+        <Container component="main" maxWidth="xs">
+        <CssBaseline />
+        <Box
+          sx={{
+            marginTop: 8,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+          }}
+        >
+          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+            <LockOutlinedIcon />
+          </Avatar>
+          <Typography component="h1" variant="h5">
+            Sign up
+          </Typography>
+          <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+            <Grid container spacing={2}>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  name="userOrEmail"
+                  required
+                  fullWidth
+                  id="userOrEmail"
+                  label="User or Email Address"
+                autoFocus
+                                value={account.userOrEmail}
+                                onChange={handleChange}
+                              
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  fullWidth
+                  name="password"
+                  label="Password"
+                  type="password"
+                  id="password"
+                                autoComplete="new-password"
+                                value={account.password}
+                                                                onChange={handleChange}
+
+                />
+              </Grid>
+            </Grid>
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              sx={{ mt: 3, mb: 2 }}
+            >
+              Sign Up
+            </Button>
+            <Grid container justifyContent="flex-end">
+              <Grid item>
+                <Link href="#" variant="body2">
+                  Don't have an account? Sign Up
                 </Link>
-                </Typography> */}
-                <Typography > Not a member yet?
-                     <Link href="#" >
-                        Sign Up 
-                </Link>
-                </Typography>
-            </Paper>
-        </Grid>
+              </Grid>
+            </Grid>
+          </Box>
+        </Box>
+        
+      </Container>  
     )
 }
 
