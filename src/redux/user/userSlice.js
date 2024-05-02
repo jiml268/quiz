@@ -17,15 +17,19 @@ const userSlice = createSlice({
   },
   extraReducers: (builder) =>
     builder
-  .addCase(usersLogin.pending, (state, action) => {
+      .addCase(usersLogin.pending, (state, action) => {
+    console.log('pending')
         state.isloading = true;
       })
 
       .addCase(usersLogin.fulfilled, (state, action) => {
-        
+            console.log('fullfiled')
+
         state.isloading = false;
       })
       .addCase(usersLogin.rejected, (state, action) => {
+            console.log('rejected')
+
         state.isloading = false;
       })
      

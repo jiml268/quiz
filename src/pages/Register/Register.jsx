@@ -2,7 +2,6 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
-import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
@@ -13,20 +12,27 @@ import Joi from "joi-browser";
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { userRegister } from '../../redux/user/userOperators';
+import { useNavigate } from "react-router-dom";
+
 
 const Register = () => {
-    const dispatch = useDispatch()
-    const [account, setAccount] = useState({ user: "", password: "", email: "" });
-    const schema = {
-        user: Joi.string().min(4).max(20).required(),
-        email: Joi.string().email().required(),
-        password: Joi.string().min(8).max(20).required(),
-    };
+  const dispatch = useDispatch()
+  const navigate = useNavigate();
+  const [account, setAccount] = useState({ user: "", password: "", email: "" });
+  const schema = {
+    user: Joi.string().min(4).max(20).required(),
+    email: Joi.string().email().required(),
+    password: Joi.string().min(8).max(20).required(),
+  };
     
-    const handleChange = e => {
-        const { name, value } = e.target;
-        setAccount({ ...account, [name]: value });
-    }
+  const handleChange = e => {
+    const { name, value } = e.target;
+    setAccount({ ...account, [name]: value });
+  }
+  
+  const handleClick = () => {
+    navigate('/login')
+  }
 
 
     const handleSubmit = async (e) => {
@@ -183,9 +189,16 @@ theme: "colored",
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link href="#" variant="body2">
-                  Already have an account? Sign in
-                </Link>
+                 <Button
+              type="button"
+              fullWidth
+              variant="contained"
+                  sx={{ mt: 3, mb: 2 }}
+                  onClick={handleClick}
+            >
+             Already have an account? Sign in
+            </Button>
+               
               </Grid>
             </Grid>
           </Box>
