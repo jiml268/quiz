@@ -3,7 +3,8 @@ import { usersLogin, userRegister, userLogout  } from "./userOperators";
 
 const initialState = {
   isLoggedIn: false,
-  isloading: false
+  isloading: false,
+  currentLocation: ""
 };
 
 const userSlice = createSlice({
@@ -11,6 +12,10 @@ const userSlice = createSlice({
   initialState,
   reducers: {
     setIsLoggedIn: (state, action) => {
+      state.isLoggedIn = action.payload;
+    },
+
+    setCurrentLocation: (state, action) => {
       state.categoryPicked = action.payload;
     },
    
@@ -18,17 +23,14 @@ const userSlice = createSlice({
   extraReducers: (builder) =>
     builder
       .addCase(usersLogin.pending, (state, action) => {
-    console.log('pending')
         state.isloading = true;
       })
 
       .addCase(usersLogin.fulfilled, (state, action) => {
-            console.log('fullfiled')
-
+        state.isLoggedIn = true
         state.isloading = false;
       })
       .addCase(usersLogin.rejected, (state, action) => {
-            console.log('rejected')
 
         state.isloading = false;
       })
@@ -38,7 +40,7 @@ const userSlice = createSlice({
       })
 
       .addCase(userRegister.fulfilled, (state, action) => {
-        
+         state.isLoggedIn = true
         state.isloading = false;
       })
       .addCase(userRegister.rejected, (state, action) => {
@@ -56,6 +58,6 @@ const userSlice = createSlice({
         state.isloading = false;
       })
 });
-export const { setIsLoggedIn, } = userSlice.actions;
+export const { setIsLoggedIn, setCurrentLocation } = userSlice.actions;
 
 export const userReducer = userSlice.reducer;

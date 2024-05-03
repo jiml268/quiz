@@ -45,10 +45,7 @@ const Register = () => {
            const { user, password, email } = account;
             const createdUser = { username: user, password: password, email: email }
             const result = await dispatch(userRegister(createdUser))
-        console.log(result)
-        console.log("result.payload.data.code", result.payload.data.code)
-                console.log("result.payload.data.code===200", result.payload.data.code===200)
-
+       
         if (result.payload.data.code === 201) {
           setAccount({ user: "", password: "", email: "" })
           toast.success("Account Created", {
@@ -64,7 +61,6 @@ const Register = () => {
           });
         }
         if (result.payload.data.code === 200) {
-          console.log(result.payload.data.message)
           toast.warning(result.payload.data.data.message, {
             position: "top-center",
             autoClose: 5000,
@@ -100,7 +96,6 @@ const Register = () => {
             ${emailError !== "" ? emailError:""}
             ${passwordError !== "" ? passwordError:""}
             `
-            console.log(combinedError)
            toast.error(combinedError, {
                 position: "top-center",
 autoClose: 5000,

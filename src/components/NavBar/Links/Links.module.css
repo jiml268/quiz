@@ -1,0 +1,16 @@
+.links{
+    display: flex;
+    flex-direction: row;
+}
+
+.linkButtons{
+    padding: 10px ;
+    border-radius: 25px;
+    margin-right: 10px;
+    background-color: transparent;
+}
+
+.linkButtons:hover {
+    background-color: blue;
+    color: white;
+}

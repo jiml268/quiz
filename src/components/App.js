@@ -10,6 +10,7 @@ import Register from '../pages/Register/Register';
 import Login from '../pages/Login/Login'
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Navbar from '../pages/NavBar/Navbar';
 
 function App() {
 
@@ -17,6 +18,7 @@ function App() {
    
     <div className="App">
       <ToastContainer position="top-right" autoClose={3000} hideProgressBar />
+      < Navbar />
        <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/questions" element={<Quiz />} />

@@ -43,9 +43,7 @@ const handleClick = () => {
       const { userOrEmail, password } = account;
       const loginUser = { userOrEmail: userOrEmail, password: password }
       const result = await dispatch(usersLogin(loginUser))
-      console.log(result)
       const { error } = result
-      console.log(error)
       if (!error) {
         if (result.payload.data.code === 200) {
           setAccount({ userOrEmail: "", password: "" })
@@ -90,7 +88,6 @@ const handleClick = () => {
       } 
       return
     };
-    console.log("here is any other result", result)
     return
   }
    

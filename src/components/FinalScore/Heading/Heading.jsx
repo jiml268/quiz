@@ -12,7 +12,7 @@ function Heading() {
 
  return (
      <>
-         <h1 className={styles.title}>Mind Bending Quizes</h1>
+         <h1 className={styles.title}>Mind Bending Quizzes</h1>
          <h2 className={styles.title}>Quiz Results</h2>
 
          <h3 className={styles.category}>Category: {catName} </h3>
