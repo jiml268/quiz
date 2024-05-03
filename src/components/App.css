@@ -49,3 +49,12 @@
     transform: rotate(360deg);
   }
 }
+
+.navBar{
+  position: sticky;
+    top: 0;
+    background-color: cadetblue;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}

@@ -16,9 +16,13 @@ function App() {
 
   return (
    
-    <div className="App">
-      <ToastContainer position="top-right" autoClose={3000} hideProgressBar />
+    <div >
+      <> <div className='navBar'>
       < Navbar />
+        </div>
+      <ToastContainer position="top-right" autoClose={3000} hideProgressBar />
+     
+        <div  className="App">
        <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/questions" element={<Quiz />} />
@@ -31,7 +35,9 @@ function App() {
 
 
         <Route path="*" element={<p>Path not resolved</p>} />
-       </Routes>
+          </Routes>
+          </div>
+        </>
       </div>
       
   );
