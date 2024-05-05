@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import { getScores } from '../../../redux/scores/scoresOperators'
 import { getCategoryPicked } from '../../../redux/quiz/quizSelectors'
 import styles from './HighScores.module.css'
+import { getUserName } from '../../../redux/user/userSelectors'
 function HighScores() {
     const dispatch = useDispatch()
     const [showCat, setShowCat] = useState('All')
@@ -10,7 +11,8 @@ function HighScores() {
     const [scoresReceived, setScoresReceived] = useState([])
     const [scoresToShow, setScoresToShow] = useState([])
     const CategoryPicked = useSelector(getCategoryPicked)
-    const currentUser = "testuser"
+    const currentUser = useSelector(getUserName)
+    console.log('currentUser', currentUser)
 
 
     const catClicked = (e) => {
