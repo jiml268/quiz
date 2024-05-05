@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getCategories, getCatCount, getQuestions } from "./quizOperators";
+import { getCategories, getCatCount, getQuestions, sethighScore } from "./quizOperators";
+
 
 const initialState = {
   quizCategories: [],
@@ -111,12 +112,21 @@ const quizSlice = createSlice({
       })
 
                   .addCase(getQuestions.fulfilled, (state, action) => {
-        // if (action.payload.code === 200) {
-        //   state.quizQuestions = action.payload.data;
-        // }
+       
         state.isloading = false;
       })
       .addCase(getQuestions.rejected, (state, action) => {
+        state.isloading = false;
+      })
+  .addCase(sethighScore.pending, (state, action) => {
+        state.isloading = true;
+      })
+
+  .addCase(sethighScore.fulfilled, (state, action) => {
+       
+        state.isloading = false;
+      })
+      .addCase(sethighScore.rejected, (state, action) => {
         state.isloading = false;
       }),
 });
