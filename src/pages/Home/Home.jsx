@@ -12,6 +12,7 @@ import { Hourglass } from 'react-loader-spinner'
 function Home() {
   
   const dispatch = useDispatch()
+  
   const lodding = useSelector(getIsLoading)
  useEffect(() => { 
         const fetchCats = async () => {

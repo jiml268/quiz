@@ -59,6 +59,8 @@ const Register = () => {
             theme: "colored",
 
           });
+              navigate(-1)
+
         }
         if (result.payload.data.code === 200) {
           toast.warning(result.payload.data.data.message, {

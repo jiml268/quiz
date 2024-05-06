@@ -47,7 +47,27 @@ const quizSlice = createSlice({
       
        state.answersPicked.push(action.payload);
     },
-   resetState: state => initialState,
+    resetState: (state, action) => {
+      state.CategoryCount = []
+      state.quizQuestions = []
+      state.isloading = false
+      state.categoryPicked = []
+      state.difficultPicked = ""
+      state.availableQuestion = 0
+      state.askQuestions = 1
+      state.correctAnswers = 0
+      state.incorrectAnswers = 0
+      state.quizComplete = false
+      state.answersPicked = []
+    },
+   
+    resetTest: (state, action) => {
+      
+      state.correctAnswers = 0
+      state.incorrectAnswers = 0
+      state.answersPicked= []
+
+    },
 
     
   },
@@ -131,6 +151,6 @@ const quizSlice = createSlice({
       }),
 });
 export const { setCategory, setDifficult, setAskQuestions, setCorrectAnswers, setIncorrectAnswers, setQuizQuestions, setQuizComplete,
-setAnswersPicked, resetState} = quizSlice.actions;
+setAnswersPicked, resetState, resetTest} = quizSlice.actions;
 
 export const quizReducer = quizSlice.reducer;

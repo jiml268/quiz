@@ -58,6 +58,7 @@ const handleClick = () => {
             theme: "colored",
 
           });
+    navigate(-1)
         }
         if (result.payload.data.code === 401) {
           toast.warning(`Incorrect pasword for user / email  ${userOrEmail}`, {
@@ -90,6 +91,8 @@ const handleClick = () => {
     };
     return
   }
+
+   
    
     return(
         <Container component="main" maxWidth="xs">
