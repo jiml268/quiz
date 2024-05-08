@@ -19,12 +19,12 @@ function HighScores() {
         setShowCat(e.target.value);
         if (e.target.value === "All") {
             if (showUser === "All") {
-                setScoresToShow(scoresReceived)
+                setScoresToShow(scoresReceived.slice(0, 15))
             } else {
                 const filtered = scoresReceived.filter(user => {
                     return user.username === currentUser
                 })
-                setScoresToShow(filtered)
+                setScoresToShow(filtered.slice(0, 15))
             }
         } else {
 
@@ -37,12 +37,12 @@ function HighScores() {
                 const filtered = scoresReceived.filter(user => {
                     return user.category === CategoryPicked.name
                 })
-                setScoresToShow(filtered)
+                setScoresToShow(filtered.slice(0, 15))
             } else {
                 const filtered = scoresReceived.filter(user => {
                     return user.username === currentUser  && user.category === CategoryPicked.name
                 })
-                setScoresToShow(filtered)
+                setScoresToShow(filtered.slice(0, 15))
             }
         }
         }
@@ -51,12 +51,12 @@ function HighScores() {
         setShowUser(e.target.value);
         if (e.target.value === "All") {
             if (showCat === "All") {
-                setScoresToShow(scoresReceived)
+                setScoresToShow(scoresReceived.slice(0, 15))
             } else {
                 const filtered = scoresReceived.filter(user => {
                     return user.category === CategoryPicked.name
                 })
-                setScoresToShow(filtered)
+                setScoresToShow(filtered.slice(0, 15))
             }
         } else {
 
@@ -65,12 +65,12 @@ function HighScores() {
                 const filtered = scoresReceived.filter(user => {
                     return user.username === currentUser
                 })
-                setScoresToShow(filtered)
+                setScoresToShow(filtered.slice(0, 15))
             } else {
                 const filtered = scoresReceived.filter(user => {
                     return user.username === currentUser  && user.category === CategoryPicked.name
                 })
-                setScoresToShow(filtered)
+                setScoresToShow(filtered.slice(0, 15))
             }
         }
  
@@ -97,16 +97,14 @@ function HighScores() {
                 {/* <h3>Categoty</h3> */}
                 <button onClick={catClicked} value="All" className={`${styles.button} ${showCat==="All" && styles.active}`}> All Categories</button>
                 <button onClick={catClicked} value="Current" className={`${styles.button} ${showCat!=="All" && styles.active}`}> Current Category</button>
-
-            </div>   
-            <div>
                 {/* <h3>User</h3> */}
                 <button onClick={userClicked} value="All" className={`${styles.button} ${showUser==="All" && styles.active}`}> All User</button>
                 <button onClick={userClicked} value="Current" className={`${styles.button} ${showUser!=="All" && styles.active}`}> Current User</button>
 
             </div>  
             <div>
-                <h2 className={styles.userHeader}> High Scores for user:  {showUser === "All" ? "All Users" : currentUser } </h2>
+            <h2 className={styles.userHeader}> Top {scoresToShow.length<15?scoresToShow.length:15} Scores:  </h2>
+            <h2 className={styles.userHeader}> High Scores for user:  {showUser === "All" ? "All Users" : currentUser } </h2>
             </div>
  <div>
                 <h2 className={styles.categoryHeader}> Category: {showCat === "All" ? "All Categories" : CategoryPicked.name } </h2>
@@ -124,26 +122,29 @@ function HighScores() {
           </tr>
         </thead>
                     <tbody>
-                         {scoresToShow.map((item, index) => (
-                     <tr key={`${index}-tableRow`}>
-                                 <td className={styles.cellFormat} style={{display: showUser !== "All" && 'none' }}>
-                                   {item.username}  
-                                 </td>   
-                                  <td className={styles.cellFormat} style={{display: showCat !== "All" && 'none' }}>
-                                   {item.category}  
-                                 </td>
-                                  <td className={styles.cellFormat}>
-                                   {item.numOfQuestions}  
-                                 </td>
-                                  <td className={styles.cellFormat}>
-                                   {item.numCorrect}  
-                                 </td>
-                                  <td className={styles.cellFormat}>
-                                   {item.score}% 
-                                 </td>
+{}
+
+                        {scoresToShow.map((item, index) => (
+                                    <tr key={`${index}-tableRow`}>
+                                        <td className={styles.cellFormat} style={{ display: showUser !== "All" && 'none' }}>
+                                            {item.username}
+                                        </td>
+                                        <td className={styles.cellFormat} style={{ display: showCat !== "All" && 'none' }}>
+                                            {item.category}
+                                        </td>
+                                        <td className={styles.cellFormat}>
+                                            {item.numOfQuestions}
+                                        </td>
+                                        <td className={styles.cellFormat}>
+                                            {item.numCorrect}
+                                        </td>
+                                        <td className={styles.cellFormat}>
+                                            {item.score}%
+                                        </td>
                                  
-                             </tr>
-                              ))}
+                                    </tr>
+                                )
+                           )}
                     </tbody>
                     </table> : <h3>No scores to display</h3>       
             }
