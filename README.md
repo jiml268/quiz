@@ -124,8 +124,9 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 
 ## Contact
 
-Your Name - [@your_twitter](https://twitter.com/your_username) - email@example.com
+James Lynch - jimlynch268@gmail.com
 
-Project Link: [https://github.com/your_username/repo_name](https://github.com/your_username/repo_name)
+Project Link: [https://github.com/jiml268/quiz](https://github.com/jiml268/quiz)
+Backend Project Link: [https://github.com/jiml268/quiz_backend](https://github.com/jiml268/quiz_backend)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
