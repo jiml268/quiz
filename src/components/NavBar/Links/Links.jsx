@@ -38,10 +38,9 @@ function Links() {
   };
 
     const handleClose = (e) => {
-      console.log(e.currentTarget)
       setOpen(false);
         if (e.currentTarget.value === "Agree") {
-          const processOption = e.currentTarget.name
+            const processOption = e.currentTarget.name
          processClick(processOption)
            
       }
@@ -49,18 +48,20 @@ function Links() {
 
 
     const processClick = (processOption) => {
-        console.log('processOption', processOption)
+ if (location.pathname === "/questions") {
+                    dispatch(resetTest())
+                }
         switch (processOption) {
             case 'signIn':
-                dispatch(resetTest())
+               
                 navigate("/login");
                 break
             case 'registration':
-                dispatch(resetTest())
+               
                 navigate("/register");
                 break
             case 'HighScores':
-                dispatch(resetTest())
+               
                 navigate("/topscores");
                 break
             case 'logoff':
@@ -75,7 +76,6 @@ function Links() {
     }
     return (
         <>
-            {console.log('location', location)}
             {!currentLoggedIn ? <div className={styles.links}>
                 <button className={styles.linkButtons} onClick={handleClickOpen} value={"signIn"}>
                     Sign In

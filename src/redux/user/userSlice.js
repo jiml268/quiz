@@ -28,12 +28,10 @@ const userSlice = createSlice({
       })
 
       .addCase(usersLogin.fulfilled, (state, action) => {
-        console.log(action)
         state.isLoggedIn = true
         state.userName= action.payload.data.data.username
         state.isloading = false;
-         console.log(state.userName)
-                console.log(action.payload.data.data.username)
+        
       })
       .addCase(usersLogin.rejected, (state, action) => {
 
@@ -48,8 +46,7 @@ const userSlice = createSlice({
          state.isLoggedIn = true
         state.isloading = false;
         state.userName = action.payload.data.data.username
-        console.log(state.userName)
-                console.log(action.payload.data.data.username)
+      
 
 
       })

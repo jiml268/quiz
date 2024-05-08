@@ -12,10 +12,10 @@ function HighScores() {
     const [scoresToShow, setScoresToShow] = useState([])
     const CategoryPicked = useSelector(getCategoryPicked)
     const currentUser = useSelector(getUserName)
-    console.log('currentUser', currentUser)
 
 
     const catClicked = (e) => {
+        console.log(e.target.value)
         setShowCat(e.target.value);
         if (e.target.value === "All") {
             if (showUser === "All") {
@@ -29,14 +29,18 @@ function HighScores() {
         } else {
 
             if (showUser === "All") {
+                console.log( scoresReceived )
+                console.log(CategoryPicked.name)
+
+
 
                 const filtered = scoresReceived.filter(user => {
-                    return user.category === CategoryPicked
+                    return user.category === CategoryPicked.name
                 })
                 setScoresToShow(filtered)
             } else {
                 const filtered = scoresReceived.filter(user => {
-                    return user.username === currentUser  && user.category === CategoryPicked
+                    return user.username === currentUser  && user.category === CategoryPicked.name
                 })
                 setScoresToShow(filtered)
             }
@@ -50,7 +54,7 @@ function HighScores() {
                 setScoresToShow(scoresReceived)
             } else {
                 const filtered = scoresReceived.filter(user => {
-                    return user.category === CategoryPicked
+                    return user.category === CategoryPicked.name
                 })
                 setScoresToShow(filtered)
             }
@@ -64,7 +68,7 @@ function HighScores() {
                 setScoresToShow(filtered)
             } else {
                 const filtered = scoresReceived.filter(user => {
-                    return user.username === currentUser  && user.category === CategoryPicked
+                    return user.username === currentUser  && user.category === CategoryPicked.name
                 })
                 setScoresToShow(filtered)
             }
@@ -105,7 +109,7 @@ function HighScores() {
                 <h2 className={styles.userHeader}> High Scores for user:  {showUser === "All" ? "All Users" : currentUser } </h2>
             </div>
  <div>
-                <h2 className={styles.categoryHeader}> Category: {showCat === "All" ? "All Categories" : CategoryPicked } </h2>
+                <h2 className={styles.categoryHeader}> Category: {showCat === "All" ? "All Categories" : CategoryPicked.name } </h2>
             </div>
 
             {scoresToShow.length > 0 ?

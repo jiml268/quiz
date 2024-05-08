@@ -34,11 +34,9 @@ export const sethighScore = createAsyncThunk(
   async (credentials, thunkAPI) => {
     try {
       const response = await axios.post(`/setScores`, credentials);
-      console.log('response', response)
 
       return response.data;
     } catch (error) {
-            console.log('error', error)
 
       return thunkAPI.rejectWithValue(error.message);
     }

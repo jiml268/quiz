@@ -29,7 +29,6 @@ function PickCategory() {
  return (
      <>
        
-     {console.log('catPicked', catPicked)}
          <Box sx={{ minWidth: "300px", margin:  "10px 0" }}>
       <FormControl size = "small" style={{minWidth: 300}} id = "PickCat" >
         <InputLabel id="demo-simple-select-label" sx={{ color: "#fff" }}>Calegories</InputLabel>
