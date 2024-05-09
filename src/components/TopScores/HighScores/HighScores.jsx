@@ -19,12 +19,12 @@ function HighScores() {
         setShowCat(e.target.value);
         if (e.target.value === "All") {
             if (showUser === "All") {
-                setScoresToShow(scoresReceived.slice(0, 15))
+                setScoresToShow(scoresReceived.slice(0, 10))
             } else {
                 const filtered = scoresReceived.filter(user => {
                     return user.username === currentUser
                 })
-                setScoresToShow(filtered.slice(0, 15))
+                setScoresToShow(filtered.slice(0, 10))
             }
         } else {
 
@@ -37,12 +37,12 @@ function HighScores() {
                 const filtered = scoresReceived.filter(user => {
                     return user.category === CategoryPicked.name
                 })
-                setScoresToShow(filtered.slice(0, 15))
+                setScoresToShow(filtered.slice(0, 10))
             } else {
                 const filtered = scoresReceived.filter(user => {
                     return user.username === currentUser  && user.category === CategoryPicked.name
                 })
-                setScoresToShow(filtered.slice(0, 15))
+                setScoresToShow(filtered.slice(0, 10))
             }
         }
         }
@@ -51,12 +51,12 @@ function HighScores() {
         setShowUser(e.target.value);
         if (e.target.value === "All") {
             if (showCat === "All") {
-                setScoresToShow(scoresReceived.slice(0, 15))
+                setScoresToShow(scoresReceived.slice(0, 10))
             } else {
                 const filtered = scoresReceived.filter(user => {
                     return user.category === CategoryPicked.name
                 })
-                setScoresToShow(filtered.slice(0, 15))
+                setScoresToShow(filtered.slice(0, 10))
             }
         } else {
 
@@ -65,12 +65,12 @@ function HighScores() {
                 const filtered = scoresReceived.filter(user => {
                     return user.username === currentUser
                 })
-                setScoresToShow(filtered.slice(0, 15))
+                setScoresToShow(filtered.slice(0, 10))
             } else {
                 const filtered = scoresReceived.filter(user => {
                     return user.username === currentUser  && user.category === CategoryPicked.name
                 })
-                setScoresToShow(filtered.slice(0, 15))
+                setScoresToShow(filtered.slice(0, 10))
             }
         }
  
@@ -83,7 +83,7 @@ function HighScores() {
         const fetchHigh = async () => {
             const allScores = await dispatch(getScores());
             setScoresReceived(allScores.payload)
-            setScoresToShow(allScores.payload)
+            setScoresToShow(allScores.payload.slice(0, 10))
          }
          
         fetchHigh() 
@@ -103,7 +103,7 @@ function HighScores() {
 
             </div>  
             <div>
-            <h2 className={styles.userHeader}> Top {scoresToShow.length<15?scoresToShow.length:15} Scores:  </h2>
+            <h2 className={styles.userHeader}> Top {scoresToShow.length<10?scoresToShow.length:10} Scores:  </h2>
             <h2 className={styles.userHeader}> High Scores for user:  {showUser === "All" ? "All Users" : currentUser } </h2>
             </div>
  <div>

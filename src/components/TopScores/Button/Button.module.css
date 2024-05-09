@@ -1,0 +1,20 @@
+.button {
+    padding: 15px;
+    margin: 10px 15px;
+    border-radius: 25px;
+}
+
+.button:hover {
+    background-color: brown;
+    color: beige;
+}
+
+.allButtons {
+    display: flex;
+    flex-direction: row;
+    margin: 5px;
+}
+
+.noTop {
+    display: none;
+}
