@@ -9,3 +9,25 @@
     flex-direction: row;
     align-items: center;
 }
+
+.showFirework{
+    position: 'absolute';
+     top: 30; left: 30; z-index: 1
+
+}
+
+.showFireWorks{
+        position: absolute;
+            z-index: 100;
+            top: 75px;
+            left: 0;
+            width: 100%;
+            height: 50%;
+}
+
+@media screen and (min-width: 480px) {
+    .showFireWorks {
+        top: 100px;
+        height: 40%;
+    }
+}

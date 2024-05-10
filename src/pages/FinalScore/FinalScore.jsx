@@ -8,6 +8,7 @@ function FinalScore() {
 
  return (
      <>
+        
          < Heading />
          < Scores />
          <Buttons />
